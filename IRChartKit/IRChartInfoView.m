@@ -55,20 +55,6 @@
 #define SHADOWBLUR 5
 #define HOOK_SIZE 8
 
-void CGContextAddRoundedRectWithHookSimple(CGContextRef c, CGRect rect, CGFloat radius) {
-    //eventRect must be relative to rect.
-    CGFloat hookSize = HOOK_SIZE;
-    CGContextAddArc(c, rect.origin.x + radius, rect.origin.y + radius, radius, M_PI, M_PI * 1.5, 0); //upper left corner
-    CGContextAddArc(c, rect.origin.x + rect.size.width - radius, rect.origin.y + radius, radius, M_PI * 1.5, M_PI * 2, 0); //upper right corner
-    CGContextAddArc(c, rect.origin.x + rect.size.width - radius, rect.origin.y + rect.size.height - radius, radius, M_PI * 2, M_PI * 0.5, 0);
-    {
-        CGContextAddLineToPoint(c, rect.origin.x + rect.size.width / 2 + hookSize, rect.origin.y + rect.size.height);
-        CGContextAddLineToPoint(c, rect.origin.x + rect.size.width / 2, rect.origin.y + rect.size.height + hookSize);
-        CGContextAddLineToPoint(c, rect.origin.x + rect.size.width / 2 - hookSize, rect.origin.y + rect.size.height);
-    }
-    CGContextAddArc(c, rect.origin.x + radius, rect.origin.y + rect.size.height - radius, radius, M_PI * 0.5, M_PI, 0);
-    CGContextAddLineToPoint(c, rect.origin.x, rect.origin.y + radius);
-}
 
 - (void)layoutSubviews {
     [super layoutSubviews];
@@ -143,5 +129,38 @@ void CGContextAddRoundedRectWithHookSimple(CGContextRef c, CGRect rect, CGFloat 
     self.frame = theFrame;
 }
 
+#pragma mark - helpers
+
+
+void CGContextAddRoundedRectWithHookSimple(CGContextRef c, CGRect rect, CGFloat radius) {
+    //eventRect must be relative to rect.
+    CGFloat hookSize = HOOK_SIZE;
+    CGContextAddArc(c, rect.origin.x + radius, rect.origin.y + radius, radius, M_PI, M_PI * 1.5, 0); //upper left corner
+    CGContextAddArc(c, rect.origin.x + rect.size.width - radius, rect.origin.y + radius, radius, M_PI * 1.5, M_PI * 2, 0); //upper right corner
+    CGContextAddArc(c, rect.origin.x + rect.size.width - radius, rect.origin.y + rect.size.height - radius, radius, M_PI * 2, M_PI * 0.5, 0);
+    {
+        CGContextAddLineToPoint(c, rect.origin.x + rect.size.width / 2 + hookSize, rect.origin.y + rect.size.height);
+        CGContextAddLineToPoint(c, rect.origin.x + rect.size.width / 2, rect.origin.y + rect.size.height + hookSize);
+        CGContextAddLineToPoint(c, rect.origin.x + rect.size.width / 2 - hookSize, rect.origin.y + rect.size.height);
+    }
+    CGContextAddArc(c, rect.origin.x + radius, rect.origin.y + rect.size.height - radius, radius, M_PI * 0.5, M_PI, 0);
+    CGContextAddLineToPoint(c, rect.origin.x, rect.origin.y + radius);
+}
+
+void CGContextFillRoundedRect(CGContextRef c, CGRect rect, CGFloat radius) {
+    CGContextBeginPath(c);
+    CGContextAddRoundedRect(c, rect, radius);
+    CGContextFillPath(c);
+}
+
+void CGContextAddRoundedRect(CGContextRef c, CGRect rect, CGFloat radius) {
+    if(2 * radius > rect.size.height) radius = rect.size.height / 2.0;
+    if(2 * radius > rect.size.width) radius = rect.size.width / 2.0;
+    CGContextAddArc(c, rect.origin.x + radius, rect.origin.y + radius, radius, M_PI, M_PI * 1.5, 0);
+    CGContextAddArc(c, rect.origin.x + rect.size.width - radius, rect.origin.y + radius, radius, M_PI * 1.5, M_PI * 2, 0);
+    CGContextAddArc(c, rect.origin.x + rect.size.width - radius, rect.origin.y + rect.size.height - radius, radius, M_PI * 2, M_PI * 0.5, 0);
+    CGContextAddArc(c, rect.origin.x + radius, rect.origin.y + rect.size.height - radius, radius, M_PI * 0.5, M_PI, 0);
+    CGContextAddLineToPoint(c, rect.origin.x, rect.origin.y + radius);
+}
 
 @end

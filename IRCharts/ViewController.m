@@ -7,8 +7,7 @@
 //
 
 #import "ViewController.h"
-#import "IRPieChartView.h"
-#import "IRLegendView.h"
+
 
 @interface ViewController ()
 {
@@ -40,41 +39,56 @@ static inline UIColor *GetRandomUIColor()
     [self setupDoughnutChart];
     [self setupLineChart];
     
-
-    
 }
+
+
 
 - (void)setupLineChart{
     
-    IRLineChartView *lineChartView = [[IRLineChartView alloc] initWithFrame:self.view_lineChart.frame];
+    NSArray *xSteps = @[@"1", @"2", @"3",@"4", @"5", @"6", @"7", @"8",@"9", @"10", @"11", @"12",@"13",@"14",@"15",@"16",@"17",@"18",@"19",@"20",@"21",@"22",@"23",@"24",@"25",@"26",@"27",@"28",@"29",@"30",@"31"];
+    
+    
+    UIScrollView *scrollView = [[UIScrollView alloc] initWithFrame:self.view_lineChart.frame];
+    scrollView.showsHorizontalScrollIndicator = NO;
+    CGRect rect = self.view_lineChart.frame;
+
+    // uncomment if want to make inside the scroll view
+    // scrollable
+//    rect.size.width = CGRectGetWidth(rect)*2;
+//    scrollView.contentSize = rect.size;
+    
+    IRLineChartView *lineChartView = [[IRLineChartView alloc] initWithFrame:rect];
     self.view_lineChart.backgroundColor = [UIColor clearColor];
     self.view_lineChart.clipsToBounds = NO;
     //    self.xSteps = @[@"Jan", @"Feb", @"Mac",@"April", @"May", @"Jun", @"Julai", @"Ogos",@"September", @"Oktober", @"November", @"Disember"];
-    lineChartView.xSteps = @[@"1", @"2", @"3",@"4", @"5", @"6", @"7", @"8",@"9", @"10", @"11", @"12",@"13",@"14",@"15",@"16",@"17",@"18",@"19",@"20",@"21",@"22",@"23",@"24",@"25",@"26",@"27",@"28",@"29",@"30",@"31"];
+    lineChartView.xSteps = xSteps;
     
-    NSArray *data = @[@(0.0),@(12.2),@(0.3),@(0.5),@(0.6),@(0.8),@(0.2),@(0.0),@(0.8),@(0.8),@(1.0),@(0.3),@(0.2)];
-    NSArray *data2 = @[@(0.1),@(0.4),@(0.7),@(0.2),@(0.6),@(0.8),@(0.2),@(0.3),@(0.1),@(0.3),@(1.0),@(0.6),@(0.4)];
-    NSArray *data3 = @[@(0.5),@(0.3),@(0.8),@(0.5),@(0.3),@(0.2),@(0.3),@(0.9),@(0.1),@(0.3),@(1.0),@(0.6),@(0.4)];
-    NSArray *data4 = @[@(0.1),@(0.12),@(0.3),@(0.4),@(0.3),@(0.2),@(0.3),@(0.9),@(0.1),@(0.3),@(1.0),@(0.5),@(0.2)];
+    NSArray *data = @[@(4),@(12),@(3),@(2),@(6),@(8),@(22),@(0),@(0.8),@(0.8),@(1.0),@(3),@(2)];
+    NSArray *data2 = @[@(1),@(4),@(7),@(23),@(6),@(8),@(22),@(23),@(1),@(3),@(1.0),@(6),@(4)];
+    NSArray *data3 = @[@(21),@(32),@(8),@(5),@(13),@(32),@(3),@(9),@(21),@(12),@(1.0),@(6),@(4)];
+    NSArray *data4 = @[@(121),@(12),@(3),@(11),@(3),@(2),@(3),@(9),@(1),@(3),@(1.0),@(5),@(2),@(121),@(121),@(121),@(121),@(121),@(121),@(124),@(121),@(11)];
     
     lineChartView.allDataArray = @[@[@{@"sms":data},GetRandomUIColor()],
                                    @[@{@"mobile":data2},GetRandomUIColor()],
                                    @[@{@"email":data3},GetRandomUIColor()],
-                                   @[@{@"hohho":data4},GetRandomUIColor()]
+                                   @[@{@"web":data4},GetRandomUIColor()]
                                    ];
     
     lineChartView.backgroundColor = [UIColor clearColor];
     
-    [self.view addSubview:lineChartView];
-    
+    [self.view addSubview:scrollView];
+    [scrollView addSubview:lineChartView];
     
     // legend
+    
+    
     
     IRLegendView *legendView = [[IRLegendView alloc] initWithFrame:CGRectMake(self.view_lineChart.frame.origin.x, self.view_lineChart.frame.origin.y+self.view_lineChart.frame.size.height, self.view_lineChart.frame.size.width, 300)];
     legendView.dataType = IRLegendViewDataLineChart;
     legendView.data = lineChartView.allDataArray;
     legendView.backgroundColor = [UIColor clearColor];
     [self.view addSubview:legendView];
+    
     
 }
 

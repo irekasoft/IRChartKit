@@ -54,7 +54,7 @@
                 text = self.data[count][0];
             }else if(self.dataType == IRLegendViewDataLineChart){
                 
-                NSLog(@"self.data %@",self.data);
+//                NSLog(@"self.data %@",self.data);
                 boxColor = self.data[count][1];
                 text = [[self.data[count][0] allKeys] firstObject];
 

@@ -23,11 +23,16 @@ typedef void(^IRLineChartDeselectedItem)();
     UIColor* color;
     UIColor* color3;
     
-    CGFloat topMargin;
+
     
     
     
 }
+
+@property double scaleForAnimation;
+
+@property NSNumber *selectedData;
+@property UIView *currentPosView; // the red line
 
 @property double yMin;
 @property double yMax;
@@ -37,7 +42,7 @@ typedef void(^IRLineChartDeselectedItem)();
 
 @property IRChartInfoView *infoView;
 
-@property UIView *currentPosView;
+
 @property UILabel *xAxisLabel;
 
 @property (copy) IRLineChartSelectedItem selectedItemCallback;

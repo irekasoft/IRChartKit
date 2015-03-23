@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
+#import "IRPieChartView.h"
+#import "IRLegendView.h"
+#import "IRLineChartView.h"
+
 //! Project version number for IRChartKit.
 FOUNDATION_EXPORT double IRChartKitVersionNumber;
 
@@ -15,5 +19,6 @@ FOUNDATION_EXPORT double IRChartKitVersionNumber;
 FOUNDATION_EXPORT const unsigned char IRChartKitVersionString[];
 
 // In this header, you should import all the public headers of your framework using statements like #import <IRChartKit/PublicHeader.h>
+
 
 

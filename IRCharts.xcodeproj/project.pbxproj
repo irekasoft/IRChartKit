@@ -19,12 +19,16 @@
 		A3988D211AA8757F00A050B5 /* IRChartKitTests.m in Sources */ = {isa = PBXBuildFile; fileRef = A3988D201AA8757F00A050B5 /* IRChartKitTests.m */; };
 		A3988D241AA8757F00A050B5 /* IRChartKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A3988D0D1AA8757F00A050B5 /* IRChartKit.framework */; };
 		A3988D251AA8757F00A050B5 /* IRChartKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A3988D0D1AA8757F00A050B5 /* IRChartKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		A3AA098A1ABCC3DF0045C97A /* IRChartInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = A3AA09891ABCC3DF0045C97A /* IRChartInfoView.m */; };
-		A3AA098D1ABCC4940045C97A /* UIKit+DrawingHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = A3AA098C1ABCC4940045C97A /* UIKit+DrawingHelpers.m */; };
-		A3EF48371AB73B0B004393EA /* IRColor.m in Sources */ = {isa = PBXBuildFile; fileRef = A3DCD1301AAACC4800983EBF /* IRColor.m */; };
-		A3EF48381AB73B12004393EA /* IRLegendView.m in Sources */ = {isa = PBXBuildFile; fileRef = A3005F281AADABD0004ECF16 /* IRLegendView.m */; };
-		A3EF48391AB73B15004393EA /* IRPieChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = A3988D2E1AA8759600A050B5 /* IRPieChartView.m */; };
-		A3EF483E1AB755BF004393EA /* IRLineChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = A3EF483D1AB755BF004393EA /* IRLineChartView.m */; };
+		A3ED7D9C1ABF523000761365 /* IRChartInfoView.h in Headers */ = {isa = PBXBuildFile; fileRef = A3ED7D921ABF523000761365 /* IRChartInfoView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A3ED7D9D1ABF523000761365 /* IRChartInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = A3ED7D931ABF523000761365 /* IRChartInfoView.m */; };
+		A3ED7D9E1ABF523000761365 /* IRColor.h in Headers */ = {isa = PBXBuildFile; fileRef = A3ED7D941ABF523000761365 /* IRColor.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A3ED7D9F1ABF523000761365 /* IRColor.m in Sources */ = {isa = PBXBuildFile; fileRef = A3ED7D951ABF523000761365 /* IRColor.m */; };
+		A3ED7DA01ABF523000761365 /* IRLegendView.h in Headers */ = {isa = PBXBuildFile; fileRef = A3ED7D961ABF523000761365 /* IRLegendView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A3ED7DA11ABF523000761365 /* IRLegendView.m in Sources */ = {isa = PBXBuildFile; fileRef = A3ED7D971ABF523000761365 /* IRLegendView.m */; };
+		A3ED7DA21ABF523000761365 /* IRLineChartView.h in Headers */ = {isa = PBXBuildFile; fileRef = A3ED7D981ABF523000761365 /* IRLineChartView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A3ED7DA31ABF523000761365 /* IRLineChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = A3ED7D991ABF523000761365 /* IRLineChartView.m */; };
+		A3ED7DA41ABF523000761365 /* IRPieChartView.h in Headers */ = {isa = PBXBuildFile; fileRef = A3ED7D9A1ABF523000761365 /* IRPieChartView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A3ED7DA51ABF523000761365 /* IRPieChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = A3ED7D9B1ABF523000761365 /* IRPieChartView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -73,8 +77,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		A3005F271AADABD0004ECF16 /* IRLegendView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IRLegendView.h; path = IRCharts/IRLegendView.h; sourceTree = "<group>"; };
-		A3005F281AADABD0004ECF16 /* IRLegendView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IRLegendView.m; path = IRCharts/IRLegendView.m; sourceTree = "<group>"; };
 		A3988CDF1AA873BA00A050B5 /* IRCharts.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IRCharts.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A3988CE31AA873BA00A050B5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A3988CE41AA873BA00A050B5 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -94,18 +96,18 @@
 		A3988D171AA8757F00A050B5 /* IRChartKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = IRChartKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A3988D1F1AA8757F00A050B5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A3988D201AA8757F00A050B5 /* IRChartKitTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IRChartKitTests.m; sourceTree = "<group>"; };
-		A3988D2D1AA8759600A050B5 /* IRPieChartView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IRPieChartView.h; path = IRCharts/IRPieChartView.h; sourceTree = "<group>"; };
-		A3988D2E1AA8759600A050B5 /* IRPieChartView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IRPieChartView.m; path = IRCharts/IRPieChartView.m; sourceTree = "<group>"; };
-		A3AA09881ABCC3DF0045C97A /* IRChartInfoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IRChartInfoView.h; path = IRCharts/IRChartInfoView.h; sourceTree = "<group>"; };
-		A3AA09891ABCC3DF0045C97A /* IRChartInfoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IRChartInfoView.m; path = IRCharts/IRChartInfoView.m; sourceTree = "<group>"; };
-		A3AA098B1ABCC4940045C97A /* UIKit+DrawingHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIKit+DrawingHelpers.h"; sourceTree = "<group>"; };
-		A3AA098C1ABCC4940045C97A /* UIKit+DrawingHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIKit+DrawingHelpers.m"; sourceTree = "<group>"; };
-		A3DCD12F1AAACC4800983EBF /* IRColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IRColor.h; path = IRCharts/IRColor.h; sourceTree = "<group>"; };
-		A3DCD1301AAACC4800983EBF /* IRColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IRColor.m; path = IRCharts/IRColor.m; sourceTree = "<group>"; };
+		A3ED7D921ABF523000761365 /* IRChartInfoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IRChartInfoView.h; sourceTree = "<group>"; };
+		A3ED7D931ABF523000761365 /* IRChartInfoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IRChartInfoView.m; sourceTree = "<group>"; };
+		A3ED7D941ABF523000761365 /* IRColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IRColor.h; sourceTree = "<group>"; };
+		A3ED7D951ABF523000761365 /* IRColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IRColor.m; sourceTree = "<group>"; };
+		A3ED7D961ABF523000761365 /* IRLegendView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IRLegendView.h; sourceTree = "<group>"; };
+		A3ED7D971ABF523000761365 /* IRLegendView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IRLegendView.m; sourceTree = "<group>"; };
+		A3ED7D981ABF523000761365 /* IRLineChartView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IRLineChartView.h; sourceTree = "<group>"; };
+		A3ED7D991ABF523000761365 /* IRLineChartView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IRLineChartView.m; sourceTree = "<group>"; };
+		A3ED7D9A1ABF523000761365 /* IRPieChartView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IRPieChartView.h; sourceTree = "<group>"; };
+		A3ED7D9B1ABF523000761365 /* IRPieChartView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IRPieChartView.m; sourceTree = "<group>"; };
 		A3EF483A1AB748E5004393EA /* MyPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; name = MyPlayground.playground; path = IRCharts/MyPlayground.playground; sourceTree = "<group>"; };
 		A3EF483B1AB75487004393EA /* LineChart.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; name = LineChart.playground; path = IRCharts/LineChart.playground; sourceTree = "<group>"; };
-		A3EF483C1AB755BF004393EA /* IRLineChartView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IRLineChartView.h; path = IRCharts/IRLineChartView.h; sourceTree = "<group>"; };
-		A3EF483D1AB755BF004393EA /* IRLineChartView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IRLineChartView.m; path = IRCharts/IRLineChartView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -147,7 +149,7 @@
 			children = (
 				A3EF483B1AB75487004393EA /* LineChart.playground */,
 				A3EF483A1AB748E5004393EA /* MyPlayground.playground */,
-				A3EF48361AB73AF6004393EA /* IRCharts */,
+				A3EF48361AB73AF6004393EA /* Libraries */,
 				A3988CE11AA873BA00A050B5 /* Classes */,
 				A3988CFB1AA873BA00A050B5 /* IRChartsTests */,
 				A3988D0E1AA8757F00A050B5 /* IRChartKit */,
@@ -213,6 +215,16 @@
 			isa = PBXGroup;
 			children = (
 				A3988D111AA8757F00A050B5 /* IRChartKit.h */,
+				A3ED7D921ABF523000761365 /* IRChartInfoView.h */,
+				A3ED7D931ABF523000761365 /* IRChartInfoView.m */,
+				A3ED7D941ABF523000761365 /* IRColor.h */,
+				A3ED7D951ABF523000761365 /* IRColor.m */,
+				A3ED7D961ABF523000761365 /* IRLegendView.h */,
+				A3ED7D971ABF523000761365 /* IRLegendView.m */,
+				A3ED7D981ABF523000761365 /* IRLineChartView.h */,
+				A3ED7D991ABF523000761365 /* IRLineChartView.m */,
+				A3ED7D9A1ABF523000761365 /* IRPieChartView.h */,
+				A3ED7D9B1ABF523000761365 /* IRPieChartView.m */,
 				A3988D0F1AA8757F00A050B5 /* Supporting Files */,
 			);
 			path = IRChartKit;
@@ -243,23 +255,11 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		A3EF48361AB73AF6004393EA /* IRCharts */ = {
+		A3EF48361AB73AF6004393EA /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
-				A3AA098B1ABCC4940045C97A /* UIKit+DrawingHelpers.h */,
-				A3AA098C1ABCC4940045C97A /* UIKit+DrawingHelpers.m */,
-				A3DCD12F1AAACC4800983EBF /* IRColor.h */,
-				A3DCD1301AAACC4800983EBF /* IRColor.m */,
-				A3988D2D1AA8759600A050B5 /* IRPieChartView.h */,
-				A3988D2E1AA8759600A050B5 /* IRPieChartView.m */,
-				A3005F271AADABD0004ECF16 /* IRLegendView.h */,
-				A3005F281AADABD0004ECF16 /* IRLegendView.m */,
-				A3EF483C1AB755BF004393EA /* IRLineChartView.h */,
-				A3EF483D1AB755BF004393EA /* IRLineChartView.m */,
-				A3AA09881ABCC3DF0045C97A /* IRChartInfoView.h */,
-				A3AA09891ABCC3DF0045C97A /* IRChartInfoView.m */,
 			);
-			name = IRCharts;
+			name = Libraries;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -269,7 +269,12 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A3ED7DA41ABF523000761365 /* IRPieChartView.h in Headers */,
 				A3988D121AA8757F00A050B5 /* IRChartKit.h in Headers */,
+				A3ED7DA01ABF523000761365 /* IRLegendView.h in Headers */,
+				A3ED7D9E1ABF523000761365 /* IRColor.h in Headers */,
+				A3ED7DA21ABF523000761365 /* IRLineChartView.h in Headers */,
+				A3ED7D9C1ABF523000761365 /* IRChartInfoView.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -435,15 +440,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A3AA098A1ABCC3DF0045C97A /* IRChartInfoView.m in Sources */,
-				A3EF483E1AB755BF004393EA /* IRLineChartView.m in Sources */,
 				A3988CEB1AA873BA00A050B5 /* ViewController.m in Sources */,
 				A3988CE81AA873BA00A050B5 /* AppDelegate.m in Sources */,
-				A3EF48391AB73B15004393EA /* IRPieChartView.m in Sources */,
-				A3EF48371AB73B0B004393EA /* IRColor.m in Sources */,
-				A3AA098D1ABCC4940045C97A /* UIKit+DrawingHelpers.m in Sources */,
 				A3988CE51AA873BA00A050B5 /* main.m in Sources */,
-				A3EF48381AB73B12004393EA /* IRLegendView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -459,6 +458,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A3ED7DA31ABF523000761365 /* IRLineChartView.m in Sources */,
+				A3ED7DA11ABF523000761365 /* IRLegendView.m in Sources */,
+				A3ED7D9F1ABF523000761365 /* IRColor.m in Sources */,
+				A3ED7DA51ABF523000761365 /* IRPieChartView.m in Sources */,
+				A3ED7D9D1ABF523000761365 /* IRChartInfoView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -549,7 +553,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -585,7 +589,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -598,6 +602,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = IRCharts/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 2;
@@ -609,6 +614,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = IRCharts/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 2;

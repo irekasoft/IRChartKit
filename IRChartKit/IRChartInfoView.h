@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "UIKit+DrawingHelpers.h"
+//#import "UIKit+DrawingHelpers.h"
 
 @interface IRChartInfoView : UIView
 

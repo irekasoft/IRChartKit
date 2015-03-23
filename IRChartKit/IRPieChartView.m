@@ -13,11 +13,19 @@
     
 }
 
+// it was a mistake
+- (id)initWithFrame:(CGRect)frame {
+    if((self = [super initWithFrame:frame])) {
+        [self setup];
+        [self reloadData];
+    }
+    return self;
+}
+
 -(id)initWithFrame:(CGRect)frame data:data
 {
-   self = [super initWithFrame:frame];
-   if (self != nil)
-   {
+   if((self = [super initWithFrame:frame])) {
+   
        _data = data;
        [self setup];
    }

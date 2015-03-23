@@ -8,8 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import <IRChartKit/IRChartKit.h>
-#import "IRColor.h"
-#import "IRLineChartView.h"
+
 
 @interface ViewController : UIViewController
 
