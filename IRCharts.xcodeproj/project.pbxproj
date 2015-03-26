@@ -21,8 +21,6 @@
 		A3988D251AA8757F00A050B5 /* IRChartKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A3988D0D1AA8757F00A050B5 /* IRChartKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		A3ED7D9C1ABF523000761365 /* IRChartInfoView.h in Headers */ = {isa = PBXBuildFile; fileRef = A3ED7D921ABF523000761365 /* IRChartInfoView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A3ED7D9D1ABF523000761365 /* IRChartInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = A3ED7D931ABF523000761365 /* IRChartInfoView.m */; };
-		A3ED7D9E1ABF523000761365 /* IRColor.h in Headers */ = {isa = PBXBuildFile; fileRef = A3ED7D941ABF523000761365 /* IRColor.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		A3ED7D9F1ABF523000761365 /* IRColor.m in Sources */ = {isa = PBXBuildFile; fileRef = A3ED7D951ABF523000761365 /* IRColor.m */; };
 		A3ED7DA01ABF523000761365 /* IRLegendView.h in Headers */ = {isa = PBXBuildFile; fileRef = A3ED7D961ABF523000761365 /* IRLegendView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A3ED7DA11ABF523000761365 /* IRLegendView.m in Sources */ = {isa = PBXBuildFile; fileRef = A3ED7D971ABF523000761365 /* IRLegendView.m */; };
 		A3ED7DA21ABF523000761365 /* IRLineChartView.h in Headers */ = {isa = PBXBuildFile; fileRef = A3ED7D981ABF523000761365 /* IRLineChartView.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -98,8 +96,6 @@
 		A3988D201AA8757F00A050B5 /* IRChartKitTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IRChartKitTests.m; sourceTree = "<group>"; };
 		A3ED7D921ABF523000761365 /* IRChartInfoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IRChartInfoView.h; sourceTree = "<group>"; };
 		A3ED7D931ABF523000761365 /* IRChartInfoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IRChartInfoView.m; sourceTree = "<group>"; };
-		A3ED7D941ABF523000761365 /* IRColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IRColor.h; sourceTree = "<group>"; };
-		A3ED7D951ABF523000761365 /* IRColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IRColor.m; sourceTree = "<group>"; };
 		A3ED7D961ABF523000761365 /* IRLegendView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IRLegendView.h; sourceTree = "<group>"; };
 		A3ED7D971ABF523000761365 /* IRLegendView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IRLegendView.m; sourceTree = "<group>"; };
 		A3ED7D981ABF523000761365 /* IRLineChartView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IRLineChartView.h; sourceTree = "<group>"; };
@@ -217,8 +213,6 @@
 				A3988D111AA8757F00A050B5 /* IRChartKit.h */,
 				A3ED7D921ABF523000761365 /* IRChartInfoView.h */,
 				A3ED7D931ABF523000761365 /* IRChartInfoView.m */,
-				A3ED7D941ABF523000761365 /* IRColor.h */,
-				A3ED7D951ABF523000761365 /* IRColor.m */,
 				A3ED7D961ABF523000761365 /* IRLegendView.h */,
 				A3ED7D971ABF523000761365 /* IRLegendView.m */,
 				A3ED7D981ABF523000761365 /* IRLineChartView.h */,
@@ -272,7 +266,6 @@
 				A3ED7DA41ABF523000761365 /* IRPieChartView.h in Headers */,
 				A3988D121AA8757F00A050B5 /* IRChartKit.h in Headers */,
 				A3ED7DA01ABF523000761365 /* IRLegendView.h in Headers */,
-				A3ED7D9E1ABF523000761365 /* IRColor.h in Headers */,
 				A3ED7DA21ABF523000761365 /* IRLineChartView.h in Headers */,
 				A3ED7D9C1ABF523000761365 /* IRChartInfoView.h in Headers */,
 			);
@@ -460,7 +453,6 @@
 			files = (
 				A3ED7DA31ABF523000761365 /* IRLineChartView.m in Sources */,
 				A3ED7DA11ABF523000761365 /* IRLegendView.m in Sources */,
-				A3ED7D9F1ABF523000761365 /* IRColor.m in Sources */,
 				A3ED7DA51ABF523000761365 /* IRPieChartView.m in Sources */,
 				A3ED7D9D1ABF523000761365 /* IRChartInfoView.m in Sources */,
 			);
@@ -591,6 +583,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				ONLY_ACTIVE_ARCH = NO;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -658,6 +651,7 @@
 		A3988D271AA8757F00A050B5 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = NO;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -669,9 +663,12 @@
 				);
 				INFOPLIST_FILE = IRChartKit/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				VALID_ARCHS = "arm64 armv7 armv7s";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
@@ -680,6 +677,7 @@
 		A3988D281AA8757F00A050B5 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = NO;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -687,9 +685,12 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = IRChartKit/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				VALID_ARCHS = "arm64 armv7 armv7s";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};

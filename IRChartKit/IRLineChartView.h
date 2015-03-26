@@ -16,18 +16,15 @@ typedef void(^IRLineChartDeselectedItem)();
 
 @interface IRLineChartView : UIView {
     
-    CGFloat x_base;
-    CGFloat y_base;
     CGFloat x_gap;
     
     UIColor* color;
     UIColor* color3;
-    
 
     
-    
-    
 }
+
+@property NSInteger yStepNumber;
 
 @property double scaleForAnimation;
 

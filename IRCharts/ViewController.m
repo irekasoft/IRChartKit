@@ -58,12 +58,14 @@ static inline UIColor *GetRandomUIColor()
 //    scrollView.contentSize = rect.size;
     
     IRLineChartView *lineChartView = [[IRLineChartView alloc] initWithFrame:rect];
+    lineChartView.yStepNumber = 3;
     self.view_lineChart.backgroundColor = [UIColor clearColor];
     self.view_lineChart.clipsToBounds = NO;
     //    self.xSteps = @[@"Jan", @"Feb", @"Mac",@"April", @"May", @"Jun", @"Julai", @"Ogos",@"September", @"Oktober", @"November", @"Disember"];
     lineChartView.xSteps = xSteps;
+
     
-    NSArray *data = @[@(4),@(12),@(3),@(2),@(6),@(8),@(22),@(0),@(0.8),@(0.8),@(1.0),@(3),@(2)];
+    NSArray *data = @[@(4),@(12),@(3),@(2),@(6),@(8),@(22),@(12),@(0.8),@(0.8),@(1.0),@(3),@(2)];
     NSArray *data2 = @[@(1),@(4),@(7),@(23),@(6),@(8),@(22),@(23),@(1),@(3),@(1.0),@(6),@(4)];
     NSArray *data3 = @[@(21),@(32),@(8),@(5),@(13),@(32),@(3),@(9),@(21),@(12),@(1.0),@(6),@(4)];
     NSArray *data4 = @[@(121),@(12),@(3),@(11),@(3),@(2),@(3),@(9),@(1),@(3),@(1.0),@(5),@(2),@(121),@(121),@(121),@(121),@(121),@(121),@(124),@(121),@(11)];
@@ -74,10 +76,10 @@ static inline UIColor *GetRandomUIColor()
                                    @[@{@"web":data4},GetRandomUIColor()]
                                    ];
     
-    lineChartView.backgroundColor = [UIColor clearColor];
     
-    [self.view addSubview:scrollView];
-    [scrollView addSubview:lineChartView];
+    
+    [self.view addSubview:lineChartView];
+//    [scrollView addSubview:lineChartView];
     
     // legend
     
@@ -86,6 +88,7 @@ static inline UIColor *GetRandomUIColor()
     IRLegendView *legendView = [[IRLegendView alloc] initWithFrame:CGRectMake(self.view_lineChart.frame.origin.x, self.view_lineChart.frame.origin.y+self.view_lineChart.frame.size.height, self.view_lineChart.frame.size.width, 300)];
     legendView.dataType = IRLegendViewDataLineChart;
     legendView.data = lineChartView.allDataArray;
+    legendView.column = 4;
     legendView.backgroundColor = [UIColor clearColor];
     [self.view addSubview:legendView];
     
@@ -104,7 +107,7 @@ static inline UIColor *GetRandomUIColor()
     
     pieChartView = [[IRPieChartView alloc] initWithFrame:CGRectMake(self.view_pieChart.frame.origin.x, self.view_pieChart.frame.origin.y, self.view_pieChart.frame.size.width, self.view_pieChart.frame.size.height) data:data];
     self.view_pieChart.backgroundColor = [UIColor clearColor];
-    pieChartView.isDoughnut = YES;
+    pieChartView.isDoughnut = NO;
     [self.view addSubview:pieChartView];
     
     IRLegendView *legendView = [[IRLegendView alloc] initWithFrame:CGRectMake(self.view_pieChart.frame.origin.x, self.view_pieChart.frame.origin.y+self.view_pieChart.frame.size.height, self.view_pieChart.frame.size.width, 300)];

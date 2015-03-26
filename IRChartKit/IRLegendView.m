@@ -26,13 +26,18 @@
 // An empty implementation adversely affects performance during animation.
 - (void)drawRect:(CGRect)rect {
     
+    NSUInteger column = 2;
+    if (self.column) {
+        column = self.column;
+    }
+    
     //// General Declarations
     CGContextRef context = UIGraphicsGetCurrentContext();
-    CGFloat half_width = rect.size.width/2;
+    CGFloat y_gap = rect.size.width/(float)column;
 
-   
-
-    int column = 2;
+    
+    
+    
     NSUInteger row      = [self.data count] / column;
     NSUInteger last_row = [self.data count] % column;
     
@@ -42,9 +47,6 @@
             
             UIColor *boxColor = [UIColor clearColor];
             NSString *text = @"";
-            
-            
-                
             
             // only for 2 column case
             if ((i < row) || (i == row && j < last_row)){
@@ -61,12 +63,12 @@
             }
             
             //// Rectangle Drawing
-            UIBezierPath* rectanglePath = [UIBezierPath bezierPathWithRect: CGRectMake(13 + (half_width * j), 10 + (20* i), 14, 15)];
+            UIBezierPath* rectanglePath = [UIBezierPath bezierPathWithRect: CGRectMake(13 + (y_gap * j), 10 + (20* i), 14, 15)];
             [boxColor setFill];
             [rectanglePath fill];
             
             //// Text Drawing
-            CGRect textRect = CGRectMake(33 + (half_width * j), 10 + (20* i), 116, 15);
+            CGRect textRect = CGRectMake(33 + (y_gap * j), 10 + (20* i), 116, 15);
             {
                 NSString* textContent;
                 

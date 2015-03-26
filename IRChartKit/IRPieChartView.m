@@ -188,6 +188,50 @@ static inline UIColor *GetRandomUIColor()
 //        [[UIColor blackColor] set];
 //   }
    
+    [self pieLabel:context];
+}
+
+- (void)pieLabel:(CGContextRef) context{
+    UIColor *whiteColor = [UIColor whiteColor];
+    CGFloat radius = 10;
+    CGFloat diameter = 10;
+    // text
+    for (int i = 0; i < 12; i++){
+        
+        CGFloat cx = radius;
+        CGFloat cy = radius;
+        CGFloat r = radius * 0.79;
+        
+        CGFloat a = i * 30 * M_PI / 180;
+        a = a - (90 * M_PI / 180); // fix back the rotation
+        
+        CGFloat x = cx + r * cos(a);
+        CGFloat y = cy + r * sin(a);
+        
+        CGSize size = CGSizeMake(0.40*diameter, 0.30*diameter);
+        
+        
+        
+        //// Text 4 Drawing
+        CGRect text4Rect = CGRectMake(x- size.width/2, y - size.height/2, size.width, size.height);
+        {
+            NSString* textContent = @"123";
+            NSMutableParagraphStyle* text4Style = NSMutableParagraphStyle.defaultParagraphStyle.mutableCopy;
+            text4Style.alignment = NSTextAlignmentCenter;
+            
+            NSDictionary* text4FontAttributes = @{NSFontAttributeName: [UIFont fontWithName: @"Avenir-Light" size: 0.08*diameter], NSForegroundColorAttributeName: whiteColor, NSParagraphStyleAttributeName: text4Style};
+            
+            CGFloat text4TextHeight = [textContent boundingRectWithSize: CGSizeMake(text4Rect.size.width, INFINITY)  options: NSStringDrawingUsesLineFragmentOrigin attributes: text4FontAttributes context: nil].size.height;
+            CGContextSaveGState(context);
+            
+            CGContextClipToRect(context, text4Rect);
+            
+            [textContent drawInRect: CGRectMake(CGRectGetMinX(text4Rect), CGRectGetMinY(text4Rect) + (CGRectGetHeight(text4Rect) - text4TextHeight) / 2, CGRectGetWidth(text4Rect), text4TextHeight) withAttributes: text4FontAttributes];
+            
+            CGContextRestoreGState(context);
+        }
+        
+    }
 }
 
 - (BOOL)beginTrackingWithTouch:(UITouch *)touch withEvent:(UIEvent *)event{

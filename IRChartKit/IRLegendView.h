@@ -15,6 +15,7 @@ typedef NS_ENUM(NSInteger, IRLegendViewDataType) {
     IRLegendViewDataLineChart
 };
 
+@property NSInteger column;
 @property IRLegendViewDataType dataType; // <nsstring, nsnumber>
 @property (strong) NSArray *data; // <nsstring, nsnumber>
 

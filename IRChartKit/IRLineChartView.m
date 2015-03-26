@@ -38,16 +38,16 @@
     self.backgroundColor = [UIColor clearColor];
     self.clipsToBounds = NO;
 
+    //
     //1 / self.contentScaleFactor
     self.currentPosView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 1 / self.contentScaleFactor, CGRectGetHeight(self.bounds)-BOTTOM*2.5)];
     self.currentPosView.backgroundColor = [UIColor colorWithRed:0.7 green:0.0 blue:0.0 alpha:1.0];
     self.currentPosView.autoresizingMask = UIViewAutoresizingFlexibleHeight;
-    self.currentPosView.alpha = 1.0;
+    self.currentPosView.alpha = 0.0;
     [self addSubview:self.currentPosView];
     NSLog(@"inst");
     
 }
-
 
 -(void)reloadData
 {
@@ -57,39 +57,36 @@
 }
 
 #define TOP_MARGIN 18
-
+#define X_BASE 55
+#define Y_BASE 18.5
 
  // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.
 - (void)drawRect:(CGRect)rect {
 
     CGContextRef context = UIGraphicsGetCurrentContext();
-
     
     //// Color Declarations
     color  = [UIColor colorWithRed: 0.851 green: 0.851 blue: 0.851 alpha: 1];
     color3 = [UIColor colorWithRed: 0.21 green: 0.556 blue: 1 alpha: 1];
     
-    x_base = 55; // x starter
-    y_base = 18.5;
-    
     CGFloat rightMargin = 5;
 
-    //// x grid
-    x_gap = (rect.size.width - rightMargin - x_base) / self.xSteps.count;
+    //// horizontal grid
+    x_gap = (rect.size.width - rightMargin - X_BASE) / self.xSteps.count;
     CGFloat text_width = self.bounds.size.width / self.xSteps.count;
     
     for (int i = 0; i < self.xSteps.count; i++){
         
         UIBezierPath* bezier5Path = UIBezierPath.bezierPath;
-        [bezier5Path moveToPoint: CGPointMake(x_base + (i * x_gap), rect.size.height-y_base)];
-        [bezier5Path addLineToPoint: CGPointMake(x_base + (i * x_gap), 0)];
+        [bezier5Path moveToPoint: CGPointMake(X_BASE + (i * x_gap), rect.size.height-Y_BASE*2)];
+        [bezier5Path addLineToPoint: CGPointMake(X_BASE + (i * x_gap), 0)];
         [color setStroke];
         bezier5Path.lineWidth = 1;
         [bezier5Path stroke];
         
         //// 1, 2, 3, xSteps
-        CGRect textRect = CGRectMake( x_base + (i * x_gap) - text_width/2, rect.size.height-y_base-BOTTOM, text_width, BOTTOM);
+        CGRect textRect = CGRectMake( X_BASE + (i * x_gap) - text_width/2, rect.size.height-Y_BASE-BOTTOM, text_width, BOTTOM);
         {
             NSString* textContent =self.xSteps[i];
             NSLog(@"text %@",textContent);
@@ -107,30 +104,38 @@
     }
 
     
-    CGFloat height_y_range = rect.size.height - y_base*2 - TOP_MARGIN;
+    CGFloat height_y_range = rect.size.height - Y_BASE*2 - TOP_MARGIN;
 
     // xpoints
-    NSArray *points = @[@(0),@(0.2),@(0.4), @(0.6), @(0.8),@(1)];
-
-    // y grid
+    // should be flexible at some times.
+    NSArray *points;
+    if (self.yStepNumber){
+        NSMutableArray *tempArray = [NSMutableArray array];
+        CGFloat yGap = 1.0/(float)self.yStepNumber;
+        for (int i = 0; i < self.yStepNumber; i++) {
+            [tempArray addObject:@(yGap*i)];
+        }
+        
+        points = tempArray;
+    }else{
+        points = @[@(0),@(0.2),@(0.4), @(0.6), @(0.8),@(1)];
+    }
+    // vertical axis
     for (int i = 0; i < points.count; i++){
         
-        UIBezierPath* bezier4Path = UIBezierPath.bezierPath;
-        
+        UIBezierPath* verticalPath = UIBezierPath.bezierPath;
         CGFloat y_pos = (height_y_range * [points[i] floatValue]) + TOP_MARGIN;
-        
-        [bezier4Path moveToPoint:CGPointMake(x_base, y_pos)];
-        [bezier4Path addLineToPoint:CGPointMake(rect.size.width - rightMargin, y_pos)];
-        
+        [verticalPath moveToPoint:CGPointMake(X_BASE, y_pos)];
+        [verticalPath addLineToPoint:CGPointMake(rect.size.width - rightMargin, y_pos)];
         [color setStroke];
-        bezier4Path.lineWidth = 1;
-        [bezier4Path stroke];
+        verticalPath.lineWidth = 1;
+        [verticalPath stroke];
         
-        //// Text Drawing
-        
+        // Text Drawing
+        // Text Size
         CGFloat width = 50;
         CGFloat height = 20;
-        CGRect textRect = CGRectMake(x_base-width-10, y_pos-height/2, width, height);
+        CGRect textRect = CGRectMake(X_BASE-width-10, y_pos-height/2, width, height);
         {
 
             NSString* textContent = @"-";
@@ -158,34 +163,29 @@
         
     }
 
-    
-    
+    //
+    // black grid
     //// Base black axis-x/-y
-    UIBezierPath* bezierPath = UIBezierPath.bezierPath;
-    [bezierPath moveToPoint: CGPointMake(x_base, 0)];
-    [bezierPath addLineToPoint: CGPointMake(x_base, rect.size.height-y_base)];
-    [bezierPath addLineToPoint: CGPointMake( rect.size.width - rightMargin, rect.size.height-y_base)];
+    UIBezierPath* bezierPath = [UIBezierPath bezierPath];
+    [bezierPath moveToPoint: CGPointMake(X_BASE, 0)];
+    [bezierPath addLineToPoint: CGPointMake(X_BASE, CGRectGetHeight(rect)-Y_BASE*2)];
+    [bezierPath addLineToPoint: CGPointMake( rect.size.width - rightMargin, rect.size.height-Y_BASE*2)];
     [UIColor.blackColor setStroke];
     bezierPath.lineWidth = 1;
-    
-    
     [bezierPath stroke];
     
     // stratergy is to analyze all the data.
-    
-    CGFloat maxVolume;
-    CGFloat minVolume;
-
-    //    CGFloat verticalScale = CGRectGetHeight(rect) / (maxVolume - minVolume);
+//    CGFloat maxVolume;
+//    CGFloat minVolume;
+//    CGFloat verticalScale = CGRectGetHeight(rect) / (maxVolume - minVolume);
 //    CGFloat tradingDayLineSpacing = rint(CGRectGetWidth(rect) / 12.0f);
 //    
 //    CGFloat counter = 0.0;
 //    CGFloat maxY = CGRectGetMaxY(rect);
     
-    
+    // This is the point where we want to plot
+    // the graph
     for (NSArray *array in self.allDataArray){
-//        NSLog(@"values %@",[[dict allValues] firstObject]);
-//        NSLog(@"keys %@",[[dict allKeys] firstObject]);
         NSDictionary *dict = array[0];
         NSArray *data = [[dict allValues] firstObject];
         [self plot:rect data:data color:array[1]];
@@ -205,7 +205,7 @@
     CGContextTranslateCTM(ctx, 0, TOP_MARGIN);
     UIBezierPath* bezier11Path = UIBezierPath.bezierPath;
     
-    CGFloat height_y_range = rect.size.height - y_base*2 - TOP_MARGIN;
+    CGFloat height_y_range = rect.size.height - Y_BASE*2 - TOP_MARGIN;
     
     CGFloat range = self.yMax - self.yMin;
     
@@ -218,10 +218,10 @@
         CGFloat y_pos = height_y_range - (height_y_range * percentage);
         
         if (i == 0) {
-            [bezier11Path moveToPoint: CGPointMake(x_base + (i * x_gap), y_pos)];
+            [bezier11Path moveToPoint: CGPointMake(X_BASE + (i * x_gap), y_pos)];
         }else{
             
-            [bezier11Path addLineToPoint: CGPointMake(x_base + (i * x_gap), y_pos)];
+            [bezier11Path addLineToPoint: CGPointMake(X_BASE + (i * x_gap), y_pos)];
         }
         
         [bezier11Path setLineJoinStyle:kCGLineJoinRound];
@@ -244,7 +244,7 @@
         
         //// Oval 4 Drawing
         CGFloat radius = 4;
-        UIBezierPath* oval4Path = [UIBezierPath bezierPathWithOvalInRect: CGRectMake(x_base + (i * x_gap)- radius, y_pos - radius, radius * 2, radius *2 )];
+        UIBezierPath* oval4Path = [UIBezierPath bezierPathWithOvalInRect: CGRectMake(X_BASE + (i * x_gap)- radius, y_pos - radius, radius * 2, radius *2 )];
         [[UIColor whiteColor] setFill];
         [oval4Path fill];
         [color_ setStroke];
@@ -280,8 +280,10 @@
     [self hideIndicator];
 }
 
-
-
+//
+// here is the indicator the red line
+//
+//
 - (void)showIndicatorForTouch:(UITouch *)touch {
     if(! self.infoView) {
         self.infoView = [[IRChartInfoView alloc] init];
@@ -292,15 +294,47 @@
     CGFloat yRangeLen = self.yMax - self.yMin;
     if (yRangeLen == 0) yRangeLen = 1;
     CGFloat xPos = pos.x;
+    CGFloat yPos = pos.y - 44;
+
 
     NSUInteger closestIdx = INT_MAX;
     double minDist = DBL_MAX;
     double minDistY = DBL_MAX;
     CGPoint closestPos = CGPointZero;
     
-    self.infoView.center = pos;
-    self.infoView.infoLabel.text = @"test";
-    self.infoView.tapPoint = closestPos;
+    // we want to find the closest point that near to the finger.
+    // here is the challenge: get data
+    // This is the point where we want to plot
+    // the graph
+//    for (NSArray *array in self.allDataArray){
+//        NSDictionary *dict = array[0];
+//        NSArray *data = [[dict allValues] firstObject];
+//        [self plot:rect data:data color:array[1]];
+//    }
+    
+//    for(LCLineChartData *data in self.data) {
+//        double xRangeLen = data.xMax - data.xMin;
+//        
+//        // note: if necessary, could use binary search here to speed things up
+//        for(NSUInteger i = 0; i < data.itemCount; ++i) {
+//            LCLineChartDataItem *datItem = data.getData(i);
+//            CGFloat xVal = round((xRangeLen == 0 ? 0.0 : ((datItem.x - data.xMin) / xRangeLen)) * availableWidth);
+//            CGFloat yVal = round((1.0 - (datItem.y - self.yMin) / yRangeLen) * availableHeight);
+//            
+//            double dist = fabsf(xVal - xPos);
+//            double distY = fabsf(yVal - yPos);
+//            if(dist < minDist || (dist == minDist && distY < minDistY)) {
+//                minDist = dist;
+//                minDistY = distY;
+//                closest = datItem;
+//                closestData = data;
+//                closestIdx = i;
+//                closestPos = CGPointMake(xStart + xVal - 3, yStart + yVal - 7);
+//            }
+//        }
+//    }
+
+   
     
     self.selectedData = @(100);
 
@@ -339,6 +373,10 @@
     if(self.selectedItemCallback != nil) {
         self.selectedItemCallback();
     }
+    
+    self.infoView.center = CGPointMake(xPos, yPos);
+    self.infoView.infoLabel.text = @"test";
+    self.infoView.tapPoint = closestPos;
     
 }
 
