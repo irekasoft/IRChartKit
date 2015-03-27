@@ -35,17 +35,60 @@ static inline UIColor *GetRandomUIColor()
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
-
-    [self setupDoughnutChart];
+//
+//    [self setupDoughnutChart];
     [self setupLineChart];
+    [self setupBarChart];
     
 }
 
-
+- (void)setupBarChart{
+    
+    NSArray *xSteps = @[@"1", @"2", @"3",@"4", @"5", @"6", @"7", @"8",@"9", @"10", @"11", @"12",@"13",@"14",@"15",@"16",@"17",@"18",@"19"];
+    
+    
+    UIScrollView *scrollView = [[UIScrollView alloc] initWithFrame:self.view_barChart.frame];
+    scrollView.showsHorizontalScrollIndicator = NO;
+    CGRect rect = self.view_barChart.frame;
+    
+    // uncomment if want to make inside the scroll view
+    // scrollable
+    //    rect.size.width = CGRectGetWidth(rect)*2;
+    //    scrollView.contentSize = rect.size;
+    
+    IRBarChartView *lineChartView = [[IRBarChartView alloc] initWithFrame:rect];
+    lineChartView.yStepNumber = 50;
+    self.view_barChart.backgroundColor = [UIColor clearColor];
+    self.view_barChart.clipsToBounds = NO;
+    //    self.xSteps = @[@"Jan", @"Feb", @"Mac",@"April", @"May", @"Jun", @"Julai", @"Ogos",@"September", @"Oktober", @"November", @"Disember"];
+    lineChartView.xSteps = xSteps;
+    
+    
+    NSArray *data = @[@(4),@(12),@(3),@(2),@(6),@(8),@(22),@(12),@(1),@(1),@(1.0),@(3),@(2)];
+    
+    lineChartView.allDataArray = @[@[@{@"sms":data},GetRandomUIColor()]
+                                   ];
+    
+    
+    
+    [self.view addSubview:lineChartView];
+    //    [scrollView addSubview:lineChartView];
+    
+    // legend
+    
+    
+    
+    IRLegendView *legendView = [[IRLegendView alloc] initWithFrame:CGRectMake(self.view_barChart.frame.origin.x, self.view_barChart.frame.origin.y+self.view_barChart.frame.size.height, self.view_barChart.frame.size.width, 300)];
+    legendView.dataType = IRLegendViewDataLineChart;
+    legendView.data = lineChartView.allDataArray;
+    legendView.column = 4;
+    legendView.backgroundColor = [UIColor clearColor];
+    [self.view addSubview:legendView];
+}
 
 - (void)setupLineChart{
     
-    NSArray *xSteps = @[@"1", @"2", @"3",@"4", @"5", @"6", @"7", @"8",@"9", @"10", @"11", @"12",@"13",@"14",@"15",@"16",@"17",@"18",@"19",@"20",@"21",@"22",@"23",@"24",@"25",@"26",@"27",@"28",@"29",@"30",@"31"];
+    NSArray *xSteps = @[@"1", @"2", @"3",@"4", @"5", @"6", @"7", @"8",@"9", @"10", @"11", @"12",@"13",@"14",@"15",@"16",@"17",@"18",@"19",@"20",@"21",@"22",@"23",@"24",@"25",@"26",@"27"];
     
     
     UIScrollView *scrollView = [[UIScrollView alloc] initWithFrame:self.view_lineChart.frame];

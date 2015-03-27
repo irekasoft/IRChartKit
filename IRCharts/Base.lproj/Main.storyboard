@@ -16,12 +16,16 @@
                         <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Flu-k6-qYl">
-                                <rect key="frame" x="16" y="20" width="173" height="173"/>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dcq-lt-bh7">
+                                <rect key="frame" x="129" y="136" width="627" height="289"/>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dcq-lt-bh7">
-                                <rect key="frame" x="243" y="20" width="574" height="453"/>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Flu-k6-qYl">
+                                <rect key="frame" x="0.0" y="0.0" width="133" height="107"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2cL-dh-bxd">
+                                <rect key="frame" x="0.0" y="54" width="999" height="635"/>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                         </subviews>
@@ -30,13 +34,14 @@
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="iPad"/>
                     <connections>
+                        <outlet property="view_barChart" destination="2cL-dh-bxd" id="mEt-cM-vrj"/>
                         <outlet property="view_lineChart" destination="dcq-lt-bh7" id="VtL-Um-mMg"/>
                         <outlet property="view_pieChart" destination="Flu-k6-qYl" id="ope-v3-dZt"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="816" y="1125"/>
+            <point key="canvasLocation" x="650" y="1229"/>
         </scene>
     </scenes>
 </document>

@@ -14,6 +14,7 @@
 
 @property (weak, nonatomic) IBOutlet UIView *view_pieChart;
 @property (weak, nonatomic) IBOutlet UIView *view_lineChart;
+@property (weak, nonatomic) IBOutlet UIView *view_barChart;
 
 @end
 

@@ -28,6 +28,7 @@
    
        _data = data;
        [self setup];
+       [self reloadData];
    }
    return self;
 }
@@ -127,12 +128,10 @@ static inline UIColor *GetRandomUIColor()
    for (int i = 0; i < [self.data count]; i++)
    {
       double value = [self.data[i][1] doubleValue];
-
+      UIColor  *drawColor = self.data[i][2];
+       
       endAngle = startAngle + M_PI*2*value/sum;
       CGContextAddArc(context, centerX, centerY, radius, startAngle, endAngle, false);
-   
-      UIColor  *drawColor = self.data[i][2];
-   
       CGContextSetStrokeColorWithColor(context, drawColor.CGColor);
       CGContextSetLineWidth(context, lineWidth);
 
@@ -188,50 +187,78 @@ static inline UIColor *GetRandomUIColor()
 //        [[UIColor blackColor] set];
 //   }
    
-    [self pieLabel:context];
+    [self drawPieLabel:context];
 }
 
-- (void)pieLabel:(CGContextRef) context{
+// Radians to degree
+#define RADIANS_TO_DEGREES(radians) ((radians) * (180.0 / M_PI))
+// Degrees to radians
+#define DEGREES_TO_RADIANS(angle) ((angle) / 180.0 * M_PI)
+
+- (void)drawPieLabel:(CGContextRef) context
+{
+    
     UIColor *whiteColor = [UIColor whiteColor];
-    CGFloat radius = 10;
-    CGFloat diameter = 10;
+    CGFloat radius = self.bounds.size.width/2;
+    CGFloat diameter = self.bounds.size.width;
     // text
-    for (int i = 0; i < 12; i++){
-        
+    
+    
+    
+    NSLog(@"aa %d",(int)self.data.count);
+    
+
+    NSUInteger slicesCount = [self.data count];
+    double sum = 0.0f;
+    CGFloat centerX = radius;
+    CGFloat centerY = radius;
+    for (int i = 0; i < slicesCount; i++)
+    {
+        sum += [self.data[i][1] doubleValue];
+    }
+
+    float endAngle = 0.0f;
+    
+    // starting point
+    float startAngle = DEGREES_TO_RADIANS(-90);
+    for (int i = 0; i < [self.data count]; i++)
+    {
+        double value = [self.data[i][1] doubleValue];
+        double percentage = (value/sum);
+        double pieceDegree = percentage * 360;
+        double pieceRadian = DEGREES_TO_RADIANS(pieceDegree);
+//      endAngle = startAngle + DEGREES_TO_RADIANS(value)/sum;
         CGFloat cx = radius;
         CGFloat cy = radius;
-        CGFloat r = radius * 0.79;
+        CGFloat r = radius * 0.6;
         
-        CGFloat a = i * 30 * M_PI / 180;
-        a = a - (90 * M_PI / 180); // fix back the rotation
+        NSLog(@"float %f %f %f",startAngle, pieceRadian, pieceRadian-startAngle);
+        float targetAngle = startAngle + (pieceRadian/2);
         
-        CGFloat x = cx + r * cos(a);
-        CGFloat y = cy + r * sin(a);
+        CGFloat x = cx + r * cos(targetAngle);
+        CGFloat y = cy + r * sin(targetAngle);
+        NSLog(@"value %f",value);
         
         CGSize size = CGSizeMake(0.40*diameter, 0.30*diameter);
-        
-        
-        
         //// Text 4 Drawing
-        CGRect text4Rect = CGRectMake(x- size.width/2, y - size.height/2, size.width, size.height);
+        CGRect textRect = CGRectMake(x- size.width/2, y - size.height/2, size.width, size.height);
         {
-            NSString* textContent = @"123";
+            NSString* textContent = [NSString stringWithFormat:@"%0.0f",value];
             NSMutableParagraphStyle* text4Style = NSMutableParagraphStyle.defaultParagraphStyle.mutableCopy;
             text4Style.alignment = NSTextAlignmentCenter;
             
             NSDictionary* text4FontAttributes = @{NSFontAttributeName: [UIFont fontWithName: @"Avenir-Light" size: 0.08*diameter], NSForegroundColorAttributeName: whiteColor, NSParagraphStyleAttributeName: text4Style};
-            
-            CGFloat text4TextHeight = [textContent boundingRectWithSize: CGSizeMake(text4Rect.size.width, INFINITY)  options: NSStringDrawingUsesLineFragmentOrigin attributes: text4FontAttributes context: nil].size.height;
+            CGFloat text4TextHeight = [textContent boundingRectWithSize: CGSizeMake(textRect.size.width, INFINITY)  options: NSStringDrawingUsesLineFragmentOrigin attributes: text4FontAttributes context: nil].size.height;
             CGContextSaveGState(context);
-            
-            CGContextClipToRect(context, text4Rect);
-            
-            [textContent drawInRect: CGRectMake(CGRectGetMinX(text4Rect), CGRectGetMinY(text4Rect) + (CGRectGetHeight(text4Rect) - text4TextHeight) / 2, CGRectGetWidth(text4Rect), text4TextHeight) withAttributes: text4FontAttributes];
-            
+            CGContextClipToRect(context, textRect);
+            [textContent drawInRect: CGRectMake(CGRectGetMinX(textRect), CGRectGetMinY(textRect) + (CGRectGetHeight(textRect) - text4TextHeight) / 2, CGRectGetWidth(textRect), text4TextHeight) withAttributes: text4FontAttributes];
             CGContextRestoreGState(context);
         }
         
+        startAngle += pieceRadian;
+        
     }
+    
 }
 
 - (BOOL)beginTrackingWithTouch:(UITouch *)touch withEvent:(UIEvent *)event{

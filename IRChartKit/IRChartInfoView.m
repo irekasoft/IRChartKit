@@ -86,7 +86,6 @@
     CGContextRef c = UIGraphicsGetCurrentContext();
     
     CGRect theRect = self.bounds;
-    //passe x oder y Position sowie Hoehe oder Breite an, je nachdem, wo der Hook sitzt.
     theRect.size.height -= SHADOWSIZE * 2;
     theRect.origin.x += SHADOWSIZE;
     theRect.size.width -= SHADOWSIZE * 2;
@@ -103,13 +102,6 @@
     CGContextAddRoundedRectWithHookSimple(c, theRect, 7);
     CGContextFillPath(c);
     
-    [[UIColor whiteColor] set];
-    theRect.origin.x += 1;
-    theRect.origin.y += 1;
-    theRect.size.width -= 2;
-    theRect.size.height = theRect.size.height / 2 + 1;
-    CGContextSetAlpha(c, 0.2);
-    CGContextFillRoundedRect(c, theRect, 6);
 }
 
 

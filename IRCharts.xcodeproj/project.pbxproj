@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A31040B71AC4568200807DFE /* IRBarChartView.h in Headers */ = {isa = PBXBuildFile; fileRef = A31040B51AC4568200807DFE /* IRBarChartView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A31040B81AC4568200807DFE /* IRBarChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = A31040B61AC4568200807DFE /* IRBarChartView.m */; };
 		A3988CE51AA873BA00A050B5 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A3988CE41AA873BA00A050B5 /* main.m */; };
 		A3988CE81AA873BA00A050B5 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A3988CE71AA873BA00A050B5 /* AppDelegate.m */; };
 		A3988CEB1AA873BA00A050B5 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A3988CEA1AA873BA00A050B5 /* ViewController.m */; };
@@ -75,6 +77,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		A31040B51AC4568200807DFE /* IRBarChartView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IRBarChartView.h; sourceTree = "<group>"; };
+		A31040B61AC4568200807DFE /* IRBarChartView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IRBarChartView.m; sourceTree = "<group>"; };
 		A3988CDF1AA873BA00A050B5 /* IRCharts.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IRCharts.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A3988CE31AA873BA00A050B5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A3988CE41AA873BA00A050B5 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -217,6 +221,8 @@
 				A3ED7D971ABF523000761365 /* IRLegendView.m */,
 				A3ED7D981ABF523000761365 /* IRLineChartView.h */,
 				A3ED7D991ABF523000761365 /* IRLineChartView.m */,
+				A31040B51AC4568200807DFE /* IRBarChartView.h */,
+				A31040B61AC4568200807DFE /* IRBarChartView.m */,
 				A3ED7D9A1ABF523000761365 /* IRPieChartView.h */,
 				A3ED7D9B1ABF523000761365 /* IRPieChartView.m */,
 				A3988D0F1AA8757F00A050B5 /* Supporting Files */,
@@ -266,6 +272,7 @@
 				A3ED7DA41ABF523000761365 /* IRPieChartView.h in Headers */,
 				A3988D121AA8757F00A050B5 /* IRChartKit.h in Headers */,
 				A3ED7DA01ABF523000761365 /* IRLegendView.h in Headers */,
+				A31040B71AC4568200807DFE /* IRBarChartView.h in Headers */,
 				A3ED7DA21ABF523000761365 /* IRLineChartView.h in Headers */,
 				A3ED7D9C1ABF523000761365 /* IRChartInfoView.h in Headers */,
 			);
@@ -455,6 +462,7 @@
 				A3ED7DA11ABF523000761365 /* IRLegendView.m in Sources */,
 				A3ED7DA51ABF523000761365 /* IRPieChartView.m in Sources */,
 				A3ED7D9D1ABF523000761365 /* IRChartInfoView.m in Sources */,
+				A31040B81AC4568200807DFE /* IRBarChartView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

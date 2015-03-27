@@ -11,6 +11,7 @@
 #import "IRPieChartView.h"
 #import "IRLegendView.h"
 #import "IRLineChartView.h"
+#import "IRBarChartView.h"
 
 //! Project version number for IRChartKit.
 FOUNDATION_EXPORT double IRChartKitVersionNumber;
