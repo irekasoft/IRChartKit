@@ -230,7 +230,15 @@ static inline UIColor *GetRandomUIColor()
 //      endAngle = startAngle + DEGREES_TO_RADIANS(value)/sum;
         CGFloat cx = radius;
         CGFloat cy = radius;
-        CGFloat r = radius * 0.6;
+
+        CGFloat r;
+        if (self.isDoughnut) {
+            r = radius * 0.75;
+        }else{
+
+            r = radius * 0.6;
+        }
+
         
         NSLog(@"float %f %f %f",startAngle, pieceRadian, pieceRadian-startAngle);
         float targetAngle = startAngle + (pieceRadian/2);
@@ -243,11 +251,18 @@ static inline UIColor *GetRandomUIColor()
         //// Text 4 Drawing
         CGRect textRect = CGRectMake(x- size.width/2, y - size.height/2, size.width, size.height);
         {
-            NSString* textContent = [NSString stringWithFormat:@"%0.0f",value];
+            NSString* textContent;
+            if (self.isPercentage) {
+                textContent = [NSString stringWithFormat:@"%0.0f%%",(value/sum)*100];
+            }else{
+                textContent = [NSString stringWithFormat:@"%0.0f",value];
+            }
+
+            
             NSMutableParagraphStyle* text4Style = NSMutableParagraphStyle.defaultParagraphStyle.mutableCopy;
             text4Style.alignment = NSTextAlignmentCenter;
             
-            NSDictionary* text4FontAttributes = @{NSFontAttributeName: [UIFont fontWithName: @"Avenir-Light" size: 0.08*diameter], NSForegroundColorAttributeName: whiteColor, NSParagraphStyleAttributeName: text4Style};
+            NSDictionary* text4FontAttributes = @{NSFontAttributeName: [UIFont fontWithName: @"Avenir-Light" size: 0.055*diameter], NSForegroundColorAttributeName: whiteColor, NSParagraphStyleAttributeName: text4Style};
             CGFloat text4TextHeight = [textContent boundingRectWithSize: CGSizeMake(textRect.size.width, INFINITY)  options: NSStringDrawingUsesLineFragmentOrigin attributes: text4FontAttributes context: nil].size.height;
             CGContextSaveGState(context);
             CGContextClipToRect(context, textRect);

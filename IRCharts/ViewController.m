@@ -36,7 +36,7 @@ static inline UIColor *GetRandomUIColor()
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
 //
-//    [self setupDoughnutChart];
+    [self setupDoughnutChart];
     [self setupLineChart];
     [self setupBarChart];
     
@@ -56,22 +56,24 @@ static inline UIColor *GetRandomUIColor()
     //    rect.size.width = CGRectGetWidth(rect)*2;
     //    scrollView.contentSize = rect.size;
     
-    IRBarChartView *lineChartView = [[IRBarChartView alloc] initWithFrame:rect];
-    lineChartView.yStepNumber = 50;
+     NSArray *data = @[@(4),@(12),@(3),@(2),@(6),@(8),@(25),@(12),@(1),@(1),@(1.0),@(3),@(2)];
+    
+    IRBarChartView *barChartView = [[IRBarChartView alloc] initWithFrame:rect];
+    
     self.view_barChart.backgroundColor = [UIColor clearColor];
     self.view_barChart.clipsToBounds = NO;
     //    self.xSteps = @[@"Jan", @"Feb", @"Mac",@"April", @"May", @"Jun", @"Julai", @"Ogos",@"September", @"Oktober", @"November", @"Disember"];
-    lineChartView.xSteps = xSteps;
+    barChartView.xSteps = xSteps;
     
     
-    NSArray *data = @[@(4),@(12),@(3),@(2),@(6),@(8),@(22),@(12),@(1),@(1),@(1.0),@(3),@(2)];
+   
     
-    lineChartView.allDataArray = @[@[@{@"sms":data},GetRandomUIColor()]
+    barChartView.allDataArray = @[@[@{@"sms":data},GetRandomUIColor()]
                                    ];
+
+//    lineChartView.yStepNumber = lineChartView.yMax - lineChartView.yMin;
     
-    
-    
-    [self.view addSubview:lineChartView];
+    [self.view addSubview:barChartView];
     //    [scrollView addSubview:lineChartView];
     
     // legend
@@ -80,7 +82,7 @@ static inline UIColor *GetRandomUIColor()
     
     IRLegendView *legendView = [[IRLegendView alloc] initWithFrame:CGRectMake(self.view_barChart.frame.origin.x, self.view_barChart.frame.origin.y+self.view_barChart.frame.size.height, self.view_barChart.frame.size.width, 300)];
     legendView.dataType = IRLegendViewDataLineChart;
-    legendView.data = lineChartView.allDataArray;
+    legendView.data = barChartView.allDataArray;
     legendView.column = 4;
     legendView.backgroundColor = [UIColor clearColor];
     [self.view addSubview:legendView];
@@ -106,7 +108,7 @@ static inline UIColor *GetRandomUIColor()
     self.view_lineChart.clipsToBounds = NO;
     //    self.xSteps = @[@"Jan", @"Feb", @"Mac",@"April", @"May", @"Jun", @"Julai", @"Ogos",@"September", @"Oktober", @"November", @"Disember"];
     lineChartView.xSteps = xSteps;
-
+    lineChartView.hasDot = YES;
     
     NSArray *data = @[@(4),@(12),@(3),@(2),@(6),@(8),@(22),@(12),@(0.8),@(0.8),@(1.0),@(3),@(2)];
     NSArray *data2 = @[@(1),@(4),@(7),@(23),@(6),@(8),@(22),@(23),@(1),@(3),@(1.0),@(6),@(4)];
@@ -143,7 +145,7 @@ static inline UIColor *GetRandomUIColor()
     // example show donut and legend share same data
     
     NSArray *data = @[@[@"nama 1", @(10), GetRandomUIColor()],
-                    @[@"nama 2", @(40), GetRandomUIColor()],
+                    @[@"nama 2", @(70), GetRandomUIColor()],
                     @[@"nama 3", @(10), GetRandomUIColor()],
                     @[@"nama 4", @(20), GetRandomUIColor()],
                     @[@"nama 5", @(20), GetRandomUIColor()]];
@@ -151,9 +153,11 @@ static inline UIColor *GetRandomUIColor()
     pieChartView = [[IRPieChartView alloc] initWithFrame:CGRectMake(self.view_pieChart.frame.origin.x, self.view_pieChart.frame.origin.y, self.view_pieChart.frame.size.width, self.view_pieChart.frame.size.height) data:data];
     self.view_pieChart.backgroundColor = [UIColor clearColor];
     pieChartView.isDoughnut = NO;
+    pieChartView.isPercentage = YES;
     [self.view addSubview:pieChartView];
     
     IRLegendView *legendView = [[IRLegendView alloc] initWithFrame:CGRectMake(self.view_pieChart.frame.origin.x, self.view_pieChart.frame.origin.y+self.view_pieChart.frame.size.height, self.view_pieChart.frame.size.width, 300)];
+    
     legendView.dataType = IRLegendViewDataPieChart;
     legendView.data = data;
     legendView.backgroundColor = [UIColor clearColor];

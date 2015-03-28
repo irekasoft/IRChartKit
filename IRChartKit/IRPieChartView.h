@@ -10,6 +10,7 @@
 @property (strong) NSArray *data; // <nsstring, nsnumber>
 @property (assign) BOOL dropShaddow;
 @property (assign) BOOL isDoughnut;
+@property (assign) BOOL isPercentage;
 
 -(void)reloadData;
 -(id)initWithFrame:(CGRect)frame data:data;

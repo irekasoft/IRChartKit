@@ -39,7 +39,7 @@ typedef void(^IRLineChartDeselectedItem)();
 
 @property IRChartInfoView *infoView;
 
-
+@property BOOL hasDot;
 @property UILabel *xAxisLabel;
 
 @property (copy) IRLineChartSelectedItem selectedItemCallback;

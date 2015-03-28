@@ -125,7 +125,15 @@
         
         points = tempArray;
     }else{
-        points = @[@(0),@(0.5),@(1)];
+        NSMutableArray *tempArray = [NSMutableArray array];
+        
+        CGFloat yGap = 1.0/3.0;
+        
+        for (int i = 0; i < 3; i++) {
+            [tempArray addObject:@(yGap*i)];
+        }
+        
+        points = tempArray;
     }
     
     extra_bed = height_y_range*0.01;
@@ -297,7 +305,7 @@
 //
 - (void)showIndicatorForTouch:(UITouch *)touch {
     if(! self.infoView) {
-        self.infoView = [[IRChartInfoView alloc] init];
+        self.infoView = [[IRChartInfoView alloc] initWithFrame:CGRectMake(0, 0, 320, 50)];
         [self addSubview:self.infoView];
     }
     
@@ -317,35 +325,29 @@
     // here is the challenge: get data
     // This is the point where we want to plot
     // the graph
-    //    for (NSArray *array in self.allDataArray){
-    //        NSDictionary *dict = array[0];
-    //        NSArray *data = [[dict allValues] firstObject];
-    //        [self plot:rect data:data color:array[1]];
-    //    }
+    CGFloat closestX = 0;
+    NSString *text;
+    for (NSArray *array in self.allDataArray){
+        NSDictionary *dict = array[0];
+        NSArray *data = [[dict allValues] firstObject];
+
+        for (int i = 0; i < data.count; i++){
+            
+            CGFloat x = X_BASE + (i * x_gap) + x_gap/2;
+            CGFloat different = fabs(pos.x -x);
+            NSLog(@"x pos %f",fabs(pos.x -x));
+            
+            if (closestX > different || closestX == 0) {
+                closestX = different;
+                closestPos = CGPointMake(x, 0);
+                text = [NSString stringWithFormat:@"%.1f",[data[i] floatValue]];
+            }
+            
+        }
+        
+    }
     
-    //    for(LCLineChartData *data in self.data) {
-    //        double xRangeLen = data.xMax - data.xMin;
-    //
-    //        // note: if necessary, could use binary search here to speed things up
-    //        for(NSUInteger i = 0; i < data.itemCount; ++i) {
-    //            LCLineChartDataItem *datItem = data.getData(i);
-    //            CGFloat xVal = round((xRangeLen == 0 ? 0.0 : ((datItem.x - data.xMin) / xRangeLen)) * availableWidth);
-    //            CGFloat yVal = round((1.0 - (datItem.y - self.yMin) / yRangeLen) * availableHeight);
-    //
-    //            double dist = fabsf(xVal - xPos);
-    //            double distY = fabsf(yVal - yPos);
-    //            if(dist < minDist || (dist == minDist && distY < minDistY)) {
-    //                minDist = dist;
-    //                minDistY = distY;
-    //                closest = datItem;
-    //                closestData = data;
-    //                closestIdx = i;
-    //                closestPos = CGPointMake(xStart + xVal - 3, yStart + yVal - 7);
-    //            }
-    //        }
-    //    }
-    
-    
+    NSLog(@"closet %f",closestX);
     
     self.selectedData = @(100);
     
@@ -366,9 +368,9 @@
         self.xAxisLabel.alpha = 1.0;
         
         CGRect r = self.currentPosView.frame;
-        r.origin.x = xPos;
+        r.origin.x = closestPos.x;
         self.currentPosView.frame = r;
-        self.xAxisLabel.text = @"hello";
+        self.xAxisLabel.text = text;
         
         if (self.xAxisLabel.text != nil) {
             [self.xAxisLabel sizeToFit];
@@ -386,7 +388,7 @@
     }
     
     self.infoView.center = CGPointMake(xPos, yPos);
-    self.infoView.infoLabel.text = @"test";
+    self.infoView.infoLabel.text = text;
     self.infoView.tapPoint = closestPos;
     
 }

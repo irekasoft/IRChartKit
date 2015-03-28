@@ -109,6 +109,7 @@
     // xpoints
     // should be flexible at some times.
     NSArray *points;
+
     if (self.yStepNumber){
         NSMutableArray *tempArray = [NSMutableArray array];
         CGFloat yGap = 1.0/(float)self.yStepNumber;
@@ -118,7 +119,13 @@
         
         points = tempArray;
     }else{
-        points = @[@(0),@(0.2),@(0.4), @(0.6), @(0.8),@(1)];
+        NSMutableArray *tempArray = [NSMutableArray array];
+        CGFloat yGap = 1.0/5.0;
+        for (int i = 0; i < 5; i++) {
+            [tempArray addObject:@(yGap*i)];
+        }
+        
+        points = tempArray;
     }
     // vertical axis
     for (int i = 0; i <= points.count; i++){
@@ -242,22 +249,26 @@
     [bezier11Path stroke];
     
     
-    // make the 'o' mark for each point.
-    for (int i = 0; i < data.count; i++){
-        
-        CGFloat percentage = ([data[i] floatValue] - self.yMin) / range;
-        CGFloat y_pos = height_y_range - (height_y_range * percentage);
-        
-        //// Oval 4 Drawing
-        CGFloat radius = 4;
-        UIBezierPath* oval4Path = [UIBezierPath bezierPathWithOvalInRect: CGRectMake(X_BASE + (i * x_gap)- radius, y_pos - radius, radius * 2, radius *2 )];
-        [[UIColor whiteColor] setFill];
-        [oval4Path fill];
-        [color_ setStroke];
-        oval4Path.lineWidth = 2;
-        [oval4Path stroke];
-        
+    if (self.hasDot) {
+        // make the 'o' mark for each point.
+        for (int i = 0; i < data.count; i++){
+            
+            CGFloat percentage = ([data[i] floatValue] - self.yMin) / range;
+            CGFloat y_pos = height_y_range - (height_y_range * percentage);
+            
+            //// Oval 4 Drawing
+            CGFloat radius = 4;
+            UIBezierPath* oval4Path = [UIBezierPath bezierPathWithOvalInRect: CGRectMake(X_BASE + (i * x_gap)- radius, y_pos - radius, radius * 2, radius *2 )];
+            [[UIColor whiteColor] setFill];
+            [oval4Path fill];
+            [color_ setStroke];
+            oval4Path.lineWidth = 2;
+            [oval4Path stroke];
+            
+        }
     }
+    
+    
     
     
     //drawing gets shadowed
@@ -268,12 +279,12 @@
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
 
-    [self showIndicatorForTouch:[touches anyObject]];
+    //[self showIndicatorForTouch:[touches anyObject]];
 }
 
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
 
-    [self showIndicatorForTouch:[touches anyObject]];
+//    [self showIndicatorForTouch:[touches anyObject]];
 }
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
