@@ -79,6 +79,7 @@
 
 /* Begin PBXFileReference section */
 		A3083ECC1AC7F65900665CA0 /* ReadMe.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = ReadMe.md; sourceTree = "<group>"; };
+		A3083ECE1AC8000600665CA0 /* Chart.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = Chart.playground; sourceTree = "<group>"; };
 		A31040B51AC4568200807DFE /* IRBarChartView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IRBarChartView.h; sourceTree = "<group>"; };
 		A31040B61AC4568200807DFE /* IRBarChartView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IRBarChartView.m; sourceTree = "<group>"; };
 		A3988CDF1AA873BA00A050B5 /* IRCharts.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IRCharts.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -152,6 +153,7 @@
 				A3083ECC1AC7F65900665CA0 /* ReadMe.md */,
 				A3EF483B1AB75487004393EA /* LineChart.playground */,
 				A3EF483A1AB748E5004393EA /* MyPlayground.playground */,
+				A3083ECE1AC8000600665CA0 /* Chart.playground */,
 				A3EF48361AB73AF6004393EA /* Libraries */,
 				A3988CE11AA873BA00A050B5 /* Classes */,
 				A3988CFB1AA873BA00A050B5 /* IRChartsTests */,

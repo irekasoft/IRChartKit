@@ -331,7 +331,7 @@
             // in the middle
             CGFloat x = X_BASE + (i * x_gap) + x_gap/2;
             CGFloat different = fabs(pos.x -x);
-            NSLog(@"x pos %f",fabs(pos.x -x));
+//            NSLog(@"x pos %f",fabs(pos.x -x));
             
             if (closestX > different || closestX == 0) {
                 closestX = different;
@@ -342,7 +342,7 @@
         }
     }
     
-    NSLog(@"closet %f",closestX);
+//    NSLog(@"closet %f",closestX);
     
     //self.selectedData = @(100);
    
@@ -358,8 +358,8 @@
 
     }];
     
-    NSLog(@"currentPosView %@",NSStringFromCGRect(self.currentPosView.frame));
-    NSLog(@"pos %@",NSStringFromCGPoint(pos));
+//    NSLog(@"currentPosView %@",NSStringFromCGRect(self.currentPosView.frame));
+//    NSLog(@"pos %@",NSStringFromCGPoint(pos));
     
     self.infoView.center = CGPointMake(closestPos.x, yPos);
     self.infoView.infoLabel.text = text;
@@ -400,7 +400,7 @@
     for (NSArray *array in allDataArray){
         
         NSDictionary *dict = array[0];
-        NSLog(@"data %@",[[dict allValues] firstObject]);
+        //NSLog(@"data %@",[[dict allValues] firstObject]);
         NSArray *data = [[dict allValues] firstObject];
         
         [bigArray addObjectsFromArray:data];
@@ -415,7 +415,7 @@
         if (y > ymax) ymax = y;
     }];
     
-    NSLog(@"xmax %f xmin %f",ymax, ymin);
+//    NSLog(@"xmax %f xmin %f",ymax, ymin);
     _yMin = ymin;
     _yMax = ymax;
     _allDataArray = allDataArray;

@@ -3,17 +3,23 @@
 //  PieChartViewDemo
 //
 
-
 #import "IRPieChartView.h"
 #import <QuartzCore/QuartzCore.h>
 
 @implementation IRPieChartView {
-
     NSMutableArray *dataArray;
-    
 }
 
-// it was a mistake
+- (id)initWithFrame:(CGRect)frame data:data
+{
+    if((self = [super initWithFrame:frame])) {
+        _data = data;
+        [self setup];
+        [self reloadData];
+    }
+    return self;
+}
+
 - (id)initWithFrame:(CGRect)frame {
     if((self = [super initWithFrame:frame])) {
         [self setup];
@@ -22,27 +28,15 @@
     return self;
 }
 
--(id)initWithFrame:(CGRect)frame data:data
-{
-   if((self = [super initWithFrame:frame])) {
-   
-       _data = data;
-       [self setup];
-       [self reloadData];
-   }
-   return self;
-}
-
 - (void)awakeFromNib{
     [super awakeFromNib];
     [self setup];
-    
     [self reloadData];
 }
 
 
-- (void)setup{
-    
+- (void)setup
+{
     if (self.bounds.size.width != self.bounds.size.height) {
         NSLog(@"please make the size side equal");
     }
@@ -51,14 +45,11 @@
     self.backgroundColor = [UIColor clearColor];
     
     if (self.dropShaddow) {
-        
         self.layer.shadowColor = [[UIColor blackColor] CGColor];
         self.layer.shadowOffset = CGSizeMake(0.0f, 2.5f);
         self.layer.shadowRadius = 1.9f;
         self.layer.shadowOpacity = 0.9f;
-        
     }
-
     
 }
 
@@ -66,15 +57,11 @@
 {
    [self calculatePieChart];
    [self setNeedsDisplay];
-
-
 }
 
 - (void)calculatePieChart{
     NSUInteger numberOfSections = [self.data count];
-    
     dataArray = [[NSMutableArray alloc] initWithCapacity:numberOfSections];
-    
     // Get the sum
     double sum = 0;
     for (int i = 0; i < numberOfSections; i ++) {
@@ -87,59 +74,42 @@
         [dataArray addObject:[NSNumber numberWithDouble:angle]];
     }
     
-    NSLog(@"%@",dataArray);
-    
-    
-}
-
-static inline UIColor *GetRandomUIColor()
-{
-    CGFloat r = arc4random() % 255;
-    CGFloat g = arc4random() % 255;
-    CGFloat b = arc4random() % 255;
-    UIColor * color = [UIColor colorWithRed:r/255 green:g/255 blue:b/255 alpha:1.0f];
-    return color;
+//    NSLog(@"%@",dataArray);
 }
 
 - (void)drawRect:(CGRect)rect
 {
-
    //prepare
    CGContextRef context = UIGraphicsGetCurrentContext();
    CGFloat theHalf = rect.size.width/2;
    CGFloat lineWidth = theHalf;
-   
    CGFloat radius = theHalf-lineWidth/2;
-   
    CGFloat centerX = theHalf;
    CGFloat centerY = rect.size.height/2;
    
-//drawing
-   
+   // drawing
    double sum = 0.0f;
     
-    NSLog(@"aa %d",(int)self.data.count);
+   // //NSLog(@"aa %d",(int)self.data.count);
     
-    NSUInteger slicesCount = [self.data count];
+   NSUInteger slicesCount = [self.data count];
    
    for (int i = 0; i < slicesCount; i++)
    {
        sum += [self.data[i][1] doubleValue];
    }
    
-   float startAngle = -M_PI_2;
+   float startAngle = -M_PI_2; // -90
    float endAngle = 0.0f;
       
    for (int i = 0; i < [self.data count]; i++)
    {
       double value = [self.data[i][1] doubleValue];
-      UIColor  *drawColor = self.data[i][2];
-       
+      UIColor *drawColor = self.data[i][2];
       endAngle = startAngle + M_PI*2*value/sum;
       CGContextAddArc(context, centerX, centerY, radius, startAngle, endAngle, false);
       CGContextSetStrokeColorWithColor(context, drawColor.CGColor);
       CGContextSetLineWidth(context, lineWidth);
-
       CGContextStrokePath(context);
       startAngle += M_PI*2*value/sum;
        
@@ -177,7 +147,7 @@ static inline UIColor *GetRandomUIColor()
     CGFloat diameter = self.bounds.size.width;
     // text
     
-    NSLog(@"aa %d",(int)self.data.count);
+//    NSLog(@"aa %d",(int)self.data.count);
     
 
     NSUInteger slicesCount = [self.data count];
@@ -207,17 +177,16 @@ static inline UIColor *GetRandomUIColor()
         if (self.isDoughnut) {
             r = radius * 0.75;
         }else{
-
             r = radius * 0.6;
         }
 
         
-        NSLog(@"float %f %f %f",startAngle, pieceRadian, pieceRadian-startAngle);
+//        NSLog(@"float %f %f %f",startAngle, pieceRadian, pieceRadian-startAngle);
         float targetAngle = startAngle + (pieceRadian/2);
         
         CGFloat x = cx + r * cos(targetAngle);
         CGFloat y = cy + r * sin(targetAngle);
-        NSLog(@"value %f",value);
+//        NSLog(@"value %f",value);
         
         CGSize size = CGSizeMake(0.40*diameter, 0.30*diameter);
         //// Text 4 Drawing
@@ -260,28 +229,24 @@ static inline UIColor *GetRandomUIColor()
     [self showIndicatorForTouch:[touches anyObject]];
 }
 
-#pragma mark - UIControl
-
-- (BOOL)beginTrackingWithTouch:(UITouch *)touch withEvent:(UIEvent *)event{
-    
-    // when user touch the chart
-    return YES;
-}
-
-//
 - (void)showIndicatorForTouch:(UITouch *)touch {
     
     CGPoint pos = [touch locationInView:self];
-    CGPoint closestPos = CGPointZero;
     
     for (int i = 0; i < [self.data count]; i++){
-        
         double value = [self.data[i][1] doubleValue];
-
     }
     
-    NSLog(@"closet %f %f",pos.x, pos.y);
+//    NSLog(@"closet %f %f",pos.x, pos.y);
     
 }
+
+
+#pragma mark - UIControl
+
+- (BOOL)beginTrackingWithTouch:(UITouch *)touch withEvent:(UIEvent *)event{
+    return YES;
+}
+
 
 @end

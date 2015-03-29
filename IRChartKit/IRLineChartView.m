@@ -10,7 +10,15 @@
 
 @implementation IRLineChartView
 
-// it was a mistake
+
+#define BOTTOM 15
+#define X_AXIS_SPACE 15
+#define PADDING 10
+#define TOP_MARGIN 18
+#define X_BASE 55
+#define Y_BASE 18.5
+
+
 - (id)initWithFrame:(CGRect)frame {
     if((self = [super initWithFrame:frame])) {
         [self setup];
@@ -27,12 +35,6 @@
     [self reloadData];
 }
 
-#define BOTTOM 15
-#define X_AXIS_SPACE 15
-#define PADDING 10
-#define TOP_MARGIN 18
-#define X_BASE 55
-#define Y_BASE 18.5
 
 - (void)setup
 {
@@ -54,10 +56,10 @@
     self.horizontalCurrentPosLine = [[UIView alloc] initWithFrame:CGRectMake(X_BASE, 0,CGRectGetWidth(self.bounds)-X_BASE, 1 / self.contentScaleFactor)];
     self.horizontalCurrentPosLine.backgroundColor = [UIColor colorWithRed:0.7 green:0.0 blue:0.0 alpha:1.0];
     self.horizontalCurrentPosLine.autoresizingMask = UIViewAutoresizingFlexibleHeight;
-//    self.horizontalCurrentPosLine.alpha = 0.0;
+    self.horizontalCurrentPosLine.alpha = 0.0;
     [self addSubview:self.horizontalCurrentPosLine];
     
-    NSLog(@"inst");
+
     
 }
 
@@ -349,7 +351,7 @@
             // differenct of x touch position
             CGFloat x = X_BASE + (i * x_gap);
             CGFloat xDifferent = fabs(pos.x -x);
-            NSLog(@"x pos %f",fabs(pos.x -x));
+//            NSLog(@"x pos %f",fabs(pos.x -x));
             
             if (closestX > xDifferent || closestX == 0) {
                 closestX = xDifferent;
@@ -361,7 +363,7 @@
             CGFloat percentage = ([data[i] floatValue] - self.yMin) / range;
             CGFloat y = height_y_range - (height_y_range * percentage);
             CGFloat yDifferent = fabs(pos.y - y);
-            NSLog(@"y dif %f",yDifferent);
+//            NSLog(@"y dif %f",yDifferent);
             
             if (closestY > yDifferent || closestY == 0) {
                 closestY = yDifferent;
@@ -373,7 +375,7 @@
         }
     }
 
-    NSLog(@"closet %f",closestY);
+//    NSLog(@"closet %f",closestY);
     
     
     [UIView animateWithDuration:0.1 animations:^{
@@ -396,7 +398,7 @@
     }];
 
 //    NSLog(@"currentPosView %@",NSStringFromCGRect(self.verticalCurrentPosLine.frame));
-    NSLog(@"pos %@",NSStringFromCGPoint(pos));
+//    NSLog(@"pos %@",NSStringFromCGPoint(pos));
     
     self.infoView.center = CGPointMake(closestPos.x, yPos);
     self.infoView.infoLabel.text = text;
@@ -441,7 +443,7 @@
     for (NSArray *array in allDataArray){
         
         NSDictionary *dict = array[0];
-        NSLog(@"data %@",[[dict allValues] firstObject]);
+        //NSLog(@"data %@",[[dict allValues] firstObject]);
         NSArray *data = [[dict allValues] firstObject];
         
         [bigArray addObjectsFromArray:data];
@@ -456,7 +458,7 @@
         if (y > ymax) ymax = y;
     }];
     
-    NSLog(@"xmax %f xmin %f",ymax, ymin);
+//    NSLog(@"xmax %f xmin %f",ymax, ymin);
     _yMin = ymin;
     _yMax = ymax;
     _allDataArray = allDataArray;
@@ -464,15 +466,6 @@
 }
 
 #pragma mark - helper
-
-static inline UIColor *GetRandomUIColor()
-{
-    CGFloat r = arc4random() % 255;
-    CGFloat g = arc4random() % 255;
-    CGFloat b = arc4random() % 255;
-    UIColor * color = [UIColor colorWithRed:r/255 green:g/255 blue:b/255 alpha:1.0f];
-    return color;
-}
 
 
 @end
