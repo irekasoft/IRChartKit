@@ -26,9 +26,11 @@
 
 - (id)initWithFrame:(CGRect)frame {
     if ((self = [super initWithFrame:frame])) {
+        
         UIFont *fatFont = [UIFont boldSystemFontOfSize:12];
         
-        self.infoLabel = [[UILabel alloc] init]; self.infoLabel.font = fatFont;
+        self.infoLabel = [[UILabel alloc] init];
+        self.infoLabel.font = fatFont;
         self.infoLabel.backgroundColor = [UIColor clearColor]; self.infoLabel.textColor = [UIColor whiteColor];
         self.infoLabel.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleWidth;
         self.infoLabel.shadowColor = [UIColor blackColor];
@@ -64,7 +66,8 @@
     [self recalculateFrame];
     
     [self.infoLabel sizeToFit];
-    self.infoLabel.frame = CGRectMake(self.bounds.origin.x + 7, self.bounds.origin.y + 2, self.infoLabel.frame.size.width, self.infoLabel.frame.size.height);
+    self.infoLabel.textAlignment = NSTextAlignmentCenter;
+    self.infoLabel.frame = CGRectMake(self.bounds.origin.x + 7, self.bounds.origin.y + 2, 40, self.infoLabel.frame.size.height);
 }
 
 - (CGSize)sizeThatFits:(CGSize)size {
@@ -106,11 +109,11 @@
 
 
 
-#define MAX_WIDTH 400
+#define MAX_WIDTH 50
 // calculate own frame to fit within parent frame and be large enough to hold the event.
 - (void)recalculateFrame {
     CGRect theFrame = self.frame;
-    theFrame.size.width = MIN(MAX_WIDTH, theFrame.size.width);
+    theFrame.size.width = MAX(MAX_WIDTH, theFrame.size.width);
     
     CGRect theRect = self.frame; theRect.origin = CGPointZero;
     

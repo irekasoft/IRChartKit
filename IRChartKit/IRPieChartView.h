@@ -15,7 +15,6 @@
 -(void)reloadData;
 -(id)initWithFrame:(CGRect)frame data:data;
 
-
 @end
 
 @protocol PieChartViewDelegate <NSObject>

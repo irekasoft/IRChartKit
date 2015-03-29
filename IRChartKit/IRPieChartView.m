@@ -42,6 +42,11 @@
 
 
 - (void)setup{
+    
+    if (self.bounds.size.width != self.bounds.size.height) {
+        NSLog(@"please make the size side equal");
+    }
+    
     //initialization
     self.backgroundColor = [UIColor clearColor];
     
@@ -155,38 +160,7 @@ static inline UIColor *GetRandomUIColor()
         [oval8Path fill];
 
     }
-    
-//    
-//    int centerPoint = MIN(self.bounds.size.height/2, self.bounds.size.width/2);
-//    int x = centerPoint;
-//    int y = centerPoint;
-//    radius = centerPoint = UIGraphicsGetCurrentContext(); // declare the uiview as the canvas
-//    
-//    CGContextSetLineWidth(context, 10);
-//    
-//    double currentAngle = 0;
-//    int kColor = 1;
-//    
-//    
-//    NSUInteger section = [self.data count];
-//    
-//    //for (NSNumber *angle in dataArray){
-//    for (int i = 0; i < section; i ++) {
-//        
-//        double angle = [[dataArray objectAtIndex:i] doubleValue];
-//        
-//        [[UIColor blueColor] set];
-//        CGContextMoveToPoint(context, x, y);
-//        CGContextAddArc(context, 123, radius, 24, 21, 12, 1);
-//        CGContextClosePath(context);
-//        CGContextFillPath(context);
-//        
-//        currentAngle += angle;
-//        kColor ++;
-//        
-//        [[UIColor blackColor] set];
-//   }
-   
+  
     [self drawPieLabel:context];
 }
 
@@ -202,8 +176,6 @@ static inline UIColor *GetRandomUIColor()
     CGFloat radius = self.bounds.size.width/2;
     CGFloat diameter = self.bounds.size.width;
     // text
-    
-    
     
     NSLog(@"aa %d",(int)self.data.count);
     
@@ -276,10 +248,40 @@ static inline UIColor *GetRandomUIColor()
     
 }
 
+#pragma mark - touch handler UIView
+
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+    
+    [self showIndicatorForTouch:[touches anyObject]];
+}
+
+- (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
+    
+    [self showIndicatorForTouch:[touches anyObject]];
+}
+
+#pragma mark - UIControl
+
 - (BOOL)beginTrackingWithTouch:(UITouch *)touch withEvent:(UIEvent *)event{
     
     // when user touch the chart
     return YES;
+}
+
+//
+- (void)showIndicatorForTouch:(UITouch *)touch {
+    
+    CGPoint pos = [touch locationInView:self];
+    CGPoint closestPos = CGPointZero;
+    
+    for (int i = 0; i < [self.data count]; i++){
+        
+        double value = [self.data[i][1] doubleValue];
+
+    }
+    
+    NSLog(@"closet %f %f",pos.x, pos.y);
+    
 }
 
 @end

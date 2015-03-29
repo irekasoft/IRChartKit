@@ -17,19 +17,19 @@ typedef void(^IRLineChartDeselectedItem)();
 @interface IRLineChartView : UIView {
     
     CGFloat x_gap;
-    
     UIColor* color;
     UIColor* color3;
-
     
 }
 
 @property NSInteger yStepNumber;
+@property (assign) BOOL enabledFeedback;
 
 @property double scaleForAnimation;
 
 @property NSNumber *selectedData;
-@property UIView *currentPosView; // the red line
+@property UIView *verticalCurrentPosLine; // the red line
+@property UIView *horizontalCurrentPosLine; // the red line
 
 @property double yMin;
 @property double yMax;

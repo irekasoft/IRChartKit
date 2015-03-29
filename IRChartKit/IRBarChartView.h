@@ -25,21 +25,17 @@ typedef void(^IRLineChartDeselectedItem)();
 }
 
 @property NSInteger yStepNumber;
-
 @property double scaleForAnimation;
-
 @property NSNumber *selectedData;
 @property UIView *currentPosView; // the red line
-
 @property double yMin;
 @property double yMax;
 @property (strong, nonatomic) NSArray *allDataArray;
 
-@property (strong) NSArray *ySteps; /// Array of step names (NSString). At each step, a scale line is shown.
+// Array of step names (NSString). At each step, a scale line is shown.
+@property (strong) NSArray *ySteps;
 
 @property IRChartInfoView *infoView;
-
-
 @property UILabel *xAxisLabel;
 
 @property (copy) IRLineChartSelectedItem selectedItemCallback;

@@ -30,6 +30,9 @@
 #define BOTTOM 15
 #define X_AXIS_SPACE 15
 #define PADDING 10
+#define TOP_MARGIN 18
+#define X_BASE 55
+#define Y_BASE 18.5
 
 - (void)setup
 {
@@ -39,12 +42,21 @@
     self.clipsToBounds = NO;
 
     //
-    //1 / self.contentScaleFactor
-    self.currentPosView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 1 / self.contentScaleFactor, CGRectGetHeight(self.bounds)-BOTTOM*2.5)];
-    self.currentPosView.backgroundColor = [UIColor colorWithRed:0.7 green:0.0 blue:0.0 alpha:1.0];
-    self.currentPosView.autoresizingMask = UIViewAutoresizingFlexibleHeight;
-    self.currentPosView.alpha = 0.0;
-    [self addSubview:self.currentPosView];
+    // VERTICAL LINE
+    self.verticalCurrentPosLine = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 1 / self.contentScaleFactor, CGRectGetHeight(self.bounds)-BOTTOM*2.5)];
+    self.verticalCurrentPosLine.backgroundColor = [UIColor colorWithRed:0.7 green:0.0 blue:0.0 alpha:1.0];
+    self.verticalCurrentPosLine.autoresizingMask = UIViewAutoresizingFlexibleHeight;
+    self.verticalCurrentPosLine.alpha = 0.0;
+    [self addSubview:self.verticalCurrentPosLine];
+    
+
+    // HORIZONTAL LINE
+    self.horizontalCurrentPosLine = [[UIView alloc] initWithFrame:CGRectMake(X_BASE, 0,CGRectGetWidth(self.bounds)-X_BASE, 1 / self.contentScaleFactor)];
+    self.horizontalCurrentPosLine.backgroundColor = [UIColor colorWithRed:0.7 green:0.0 blue:0.0 alpha:1.0];
+    self.horizontalCurrentPosLine.autoresizingMask = UIViewAutoresizingFlexibleHeight;
+//    self.horizontalCurrentPosLine.alpha = 0.0;
+    [self addSubview:self.horizontalCurrentPosLine];
+    
     NSLog(@"inst");
     
 }
@@ -56,9 +68,7 @@
     [self setNeedsDisplay];
 }
 
-#define TOP_MARGIN 18
-#define X_BASE 55
-#define Y_BASE 18.5
+
 
  // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.
@@ -278,126 +288,126 @@
 #pragma mark - touch handler
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-
-    //[self showIndicatorForTouch:[touches anyObject]];
+    if (!self.enabledFeedback) return;
+    
+    [self showIndicatorForTouch:[touches anyObject]];
 }
 
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
-
-//    [self showIndicatorForTouch:[touches anyObject]];
+    if (!self.enabledFeedback) return;
+    
+    [self showIndicatorForTouch:[touches anyObject]];
 }
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
-
-    [self hideIndicator];
+    if (!self.enabledFeedback) return;
+    [self hideIndicatorForTouch:[touches anyObject]];
 }
 
 - (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event {
-
-    [self hideIndicator];
+    if (!self.enabledFeedback) return;
+    [self hideIndicatorForTouch:[touches anyObject]];
 }
 
-//
-// here is the indicator the red line
-//
-//
+
+
+#pragma mark - indicator
+
+//here is the indicator the red line
 - (void)showIndicatorForTouch:(UITouch *)touch {
+    CGPoint pos = [touch locationInView:self];
+
     if(! self.infoView) {
         self.infoView = [[IRChartInfoView alloc] init];
         [self addSubview:self.infoView];
     }
-    
-    CGPoint pos = [touch locationInView:self];
+
     CGFloat yRangeLen = self.yMax - self.yMin;
     if (yRangeLen == 0) yRangeLen = 1;
     CGFloat xPos = pos.x;
     CGFloat yPos = pos.y - 44;
 
-
-    NSUInteger closestIdx = INT_MAX;
-    double minDist = DBL_MAX;
-    double minDistY = DBL_MAX;
     CGPoint closestPos = CGPointZero;
     
     // we want to find the closest point that near to the finger.
-    // here is the challenge: get data
-    // This is the point where we want to plot
-    // the graph
-//    for (NSArray *array in self.allDataArray){
-//        NSDictionary *dict = array[0];
-//        NSArray *data = [[dict allValues] firstObject];
-//        [self plot:rect data:data color:array[1]];
-//    }
+    // the positioning is exactly the same
+    // with how them are plotted
     
-//    for(LCLineChartData *data in self.data) {
-//        double xRangeLen = data.xMax - data.xMin;
-//        
-//        // note: if necessary, could use binary search here to speed things up
-//        for(NSUInteger i = 0; i < data.itemCount; ++i) {
-//            LCLineChartDataItem *datItem = data.getData(i);
-//            CGFloat xVal = round((xRangeLen == 0 ? 0.0 : ((datItem.x - data.xMin) / xRangeLen)) * availableWidth);
-//            CGFloat yVal = round((1.0 - (datItem.y - self.yMin) / yRangeLen) * availableHeight);
-//            
-//            double dist = fabsf(xVal - xPos);
-//            double distY = fabsf(yVal - yPos);
-//            if(dist < minDist || (dist == minDist && distY < minDistY)) {
-//                minDist = dist;
-//                minDistY = distY;
-//                closest = datItem;
-//                closestData = data;
-//                closestIdx = i;
-//                closestPos = CGPointMake(xStart + xVal - 3, yStart + yVal - 7);
-//            }
-//        }
-//    }
+    CGFloat closestX = 0;
+    CGFloat closestY = 0;
+    NSString *text;
+    for (NSArray *array in self.allDataArray){
+        NSDictionary *dict = array[0];
+        NSArray *data = [[dict allValues] firstObject];
+        
+        CGFloat height_y_range = self.bounds.size.height - Y_BASE*2 - TOP_MARGIN;
+        CGFloat range = self.yMax - self.yMin;
+        for (int i = 0; i < data.count; i++){
 
-   
-    
-    self.selectedData = @(100);
-
-// not sure what to do with this
-//    [self.infoView sizeToFit];
-//    [self.infoView setNeedsLayout];
-//    [self.infoView setNeedsDisplay];
-    
-    if(self.currentPosView.alpha == 0.0) {
-        CGRect r = self.currentPosView.frame;
-        r.origin.x = xPos;
-        self.currentPosView.frame = r;
+            
+            
+            // differenct of x touch position
+            CGFloat x = X_BASE + (i * x_gap);
+            CGFloat xDifferent = fabs(pos.x -x);
+            NSLog(@"x pos %f",fabs(pos.x -x));
+            
+            if (closestX > xDifferent || closestX == 0) {
+                closestX = xDifferent;
+                closestPos = CGPointMake(x, 0);
+                text = [NSString stringWithFormat:@"%.1f",[data[i] floatValue]];
+            }
+            
+            // different of y touch position
+            CGFloat percentage = ([data[i] floatValue] - self.yMin) / range;
+            CGFloat y = height_y_range - (height_y_range * percentage);
+            CGFloat yDifferent = fabs(pos.y - y);
+            NSLog(@"y dif %f",yDifferent);
+            
+            if (closestY > yDifferent || closestY == 0) {
+                closestY = yDifferent;
+                closestPos = CGPointMake(closestPos.x, y);
+                text = [NSString stringWithFormat:@"%.1f",[data[i] floatValue]];
+            }
+            
+            
+        }
     }
+
+    NSLog(@"closet %f",closestY);
+    
     
     [UIView animateWithDuration:0.1 animations:^{
+
+        // black info
         self.infoView.alpha = 1.0;
-        self.currentPosView.alpha = 1.0;
-        self.xAxisLabel.alpha = 1.0;
         
-        CGRect r = self.currentPosView.frame;
-        r.origin.x = xPos;
-        self.currentPosView.frame = r;
-        self.xAxisLabel.text = @"hello";
+        // vertical line
+        self.verticalCurrentPosLine.alpha = 1.0;
+        CGRect r = self.verticalCurrentPosLine.frame;
+        r.origin.x = closestPos.x;
+        self.verticalCurrentPosLine.frame = r;
+
+        // horizontal line
+        self.horizontalCurrentPosLine.alpha = 1.0;
+        r = self.horizontalCurrentPosLine.frame;
+        r.origin.y = pos.y;
+        self.horizontalCurrentPosLine.frame = r;
         
-        if (self.xAxisLabel.text != nil) {
-            [self.xAxisLabel sizeToFit];
-            r = self.xAxisLabel.frame;
-            r.origin.x = round(closestPos.x - r.size.width / 2);
-            self.xAxisLabel.frame = r;
-        }
     }];
 
-    NSLog(@"currentPosView %@",NSStringFromCGRect(self.currentPosView.frame));
+//    NSLog(@"currentPosView %@",NSStringFromCGRect(self.verticalCurrentPosLine.frame));
     NSLog(@"pos %@",NSStringFromCGPoint(pos));
     
-    if(self.selectedItemCallback != nil) {
-        self.selectedItemCallback();
-    }
-    
-    self.infoView.center = CGPointMake(xPos, yPos);
-    self.infoView.infoLabel.text = @"test";
+    self.infoView.center = CGPointMake(closestPos.x, yPos);
+    self.infoView.infoLabel.text = text;
     self.infoView.tapPoint = closestPos;
     
+    if(self.selectedItemCallback) {
+        self.selectedItemCallback();
+    }
 }
 
-- (void)hideIndicator {
+- (void)hideIndicatorForTouch:(UITouch *)touch {
     if(self.deselectedItemCallback)
         self.deselectedItemCallback();
     
@@ -405,8 +415,9 @@
     
     [UIView animateWithDuration:0.1 animations:^{
         self.infoView.alpha = 0.0;
-        self.currentPosView.alpha = 0.0;
-        self.xAxisLabel.alpha = 0.0;
+        self.verticalCurrentPosLine.alpha = 0.0;
+        self.horizontalCurrentPosLine.alpha = 0.0;
+
     }];
 }
 

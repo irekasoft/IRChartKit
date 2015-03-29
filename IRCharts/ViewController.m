@@ -62,24 +62,21 @@ static inline UIColor *GetRandomUIColor()
     
     self.view_barChart.backgroundColor = [UIColor clearColor];
     self.view_barChart.clipsToBounds = NO;
-    //    self.xSteps = @[@"Jan", @"Feb", @"Mac",@"April", @"May", @"Jun", @"Julai", @"Ogos",@"September", @"Oktober", @"November", @"Disember"];
+    
     barChartView.xSteps = xSteps;
-    
-    
-   
-    
     barChartView.allDataArray = @[@[@{@"sms":data},GetRandomUIColor()]
                                    ];
+    barChartView.deselectedItemCallback = ^ (NSString *string, CGPoint point, NSString *value){
 
+        NSLog(@"User deselect %@ %f %@",string,point.x,value);
+
+    };
 //    lineChartView.yStepNumber = lineChartView.yMax - lineChartView.yMin;
     
     [self.view addSubview:barChartView];
     //    [scrollView addSubview:lineChartView];
     
     // legend
-    
-    
-    
     IRLegendView *legendView = [[IRLegendView alloc] initWithFrame:CGRectMake(self.view_barChart.frame.origin.x, self.view_barChart.frame.origin.y+self.view_barChart.frame.size.height, self.view_barChart.frame.size.width, 300)];
     legendView.dataType = IRLegendViewDataLineChart;
     legendView.data = barChartView.allDataArray;
@@ -96,19 +93,16 @@ static inline UIColor *GetRandomUIColor()
     UIScrollView *scrollView = [[UIScrollView alloc] initWithFrame:self.view_lineChart.frame];
     scrollView.showsHorizontalScrollIndicator = NO;
     CGRect rect = self.view_lineChart.frame;
-
-    // uncomment if want to make inside the scroll view
-    // scrollable
-//    rect.size.width = CGRectGetWidth(rect)*2;
-//    scrollView.contentSize = rect.size;
     
     IRLineChartView *lineChartView = [[IRLineChartView alloc] initWithFrame:rect];
     lineChartView.yStepNumber = 3;
+    lineChartView.enabledFeedback = YES;
     self.view_lineChart.backgroundColor = [UIColor clearColor];
     self.view_lineChart.clipsToBounds = NO;
     //    self.xSteps = @[@"Jan", @"Feb", @"Mac",@"April", @"May", @"Jun", @"Julai", @"Ogos",@"September", @"Oktober", @"November", @"Disember"];
     lineChartView.xSteps = xSteps;
     lineChartView.hasDot = YES;
+
     
     NSArray *data = @[@(4),@(12),@(3),@(2),@(6),@(8),@(22),@(12),@(0.8),@(0.8),@(1.0),@(3),@(2)];
     NSArray *data2 = @[@(1),@(4),@(7),@(23),@(6),@(8),@(22),@(23),@(1),@(3),@(1.0),@(6),@(4)];
@@ -122,12 +116,8 @@ static inline UIColor *GetRandomUIColor()
                                    ];
     
     
-    
     [self.view addSubview:lineChartView];
-//    [scrollView addSubview:lineChartView];
-    
-    // legend
-    
+   
     
     
     IRLegendView *legendView = [[IRLegendView alloc] initWithFrame:CGRectMake(self.view_lineChart.frame.origin.x, self.view_lineChart.frame.origin.y+self.view_lineChart.frame.size.height, self.view_lineChart.frame.size.width, 300)];
@@ -146,14 +136,12 @@ static inline UIColor *GetRandomUIColor()
     
     NSArray *data = @[@[@"nama 1", @(10), GetRandomUIColor()],
                     @[@"nama 2", @(70), GetRandomUIColor()],
-                    @[@"nama 3", @(10), GetRandomUIColor()],
-                    @[@"nama 4", @(20), GetRandomUIColor()],
-                    @[@"nama 5", @(20), GetRandomUIColor()]];
+                    @[@"nama 3", @(10), GetRandomUIColor()],];
     
     pieChartView = [[IRPieChartView alloc] initWithFrame:CGRectMake(self.view_pieChart.frame.origin.x, self.view_pieChart.frame.origin.y, self.view_pieChart.frame.size.width, self.view_pieChart.frame.size.height) data:data];
     self.view_pieChart.backgroundColor = [UIColor clearColor];
-    pieChartView.isDoughnut = NO;
-    pieChartView.isPercentage = YES;
+    pieChartView.isDoughnut = YES;
+    pieChartView.isPercentage = NO;
     [self.view addSubview:pieChartView];
     
     IRLegendView *legendView = [[IRLegendView alloc] initWithFrame:CGRectMake(self.view_pieChart.frame.origin.x, self.view_pieChart.frame.origin.y+self.view_pieChart.frame.size.height, self.view_pieChart.frame.size.width, 300)];

@@ -10,7 +10,7 @@
 #import <IRChartKit/IRChartKit.h>
 
 
-@interface ViewController : UIViewController
+@interface ViewController : UIViewController 
 
 @property (weak, nonatomic) IBOutlet UIView *view_pieChart;
 @property (weak, nonatomic) IBOutlet UIView *view_lineChart;

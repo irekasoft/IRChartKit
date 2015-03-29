@@ -241,8 +241,6 @@
     
     for (int i = 0; i < data.count; i++){
         
-        
-        
         CGFloat percentage = ([data[i] floatValue] - self.yMin) / range;
         
         CGFloat y_pos = height_y_range - (height_y_range * percentage);
@@ -270,9 +268,6 @@
     [bezier11Path stroke];
     
     
-   
-    
-    
     //drawing gets shadowed
     CGContextRestoreGState(ctx);
 }
@@ -291,34 +286,34 @@
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
     
-    [self hideIndicator];
+    [self hideIndicatorForTouch:[touches anyObject]];
 }
 
 - (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event {
     
-    [self hideIndicator];
+    [self hideIndicatorForTouch:[touches anyObject]];
 }
 
-//
+
+
+#pragma mark - indicator
+
 // here is the indicator the red line
-//
-//
+// and box
+
 - (void)showIndicatorForTouch:(UITouch *)touch {
+    
+    CGPoint pos = [touch locationInView:self];
+    
     if(! self.infoView) {
         self.infoView = [[IRChartInfoView alloc] initWithFrame:CGRectMake(0, 0, 320, 50)];
         [self addSubview:self.infoView];
     }
     
-    CGPoint pos = [touch locationInView:self];
+    
     CGFloat yRangeLen = self.yMax - self.yMin;
     if (yRangeLen == 0) yRangeLen = 1;
-    CGFloat xPos = pos.x;
     CGFloat yPos = pos.y - 44;
-    
-    
-    NSUInteger closestIdx = INT_MAX;
-    double minDist = DBL_MAX;
-    double minDistY = DBL_MAX;
     CGPoint closestPos = CGPointZero;
     
     // we want to find the closest point that near to the finger.
@@ -332,7 +327,8 @@
         NSArray *data = [[dict allValues] firstObject];
 
         for (int i = 0; i < data.count; i++){
-            
+            // we plus x_gap/2 because the bar
+            // in the middle
             CGFloat x = X_BASE + (i * x_gap) + x_gap/2;
             CGFloat different = fabs(pos.x -x);
             NSLog(@"x pos %f",fabs(pos.x -x));
@@ -344,58 +340,45 @@
             }
             
         }
-        
     }
     
     NSLog(@"closet %f",closestX);
     
-    self.selectedData = @(100);
-    
-    // not sure what to do with this
-    //    [self.infoView sizeToFit];
-    //    [self.infoView setNeedsLayout];
-    //    [self.infoView setNeedsDisplay];
-    
-    if(self.currentPosView.alpha == 0.0) {
-        CGRect r = self.currentPosView.frame;
-        r.origin.x = xPos;
-        self.currentPosView.frame = r;
-    }
+    //self.selectedData = @(100);
+   
     
     [UIView animateWithDuration:0.1 animations:^{
+
         self.infoView.alpha = 1.0;
         self.currentPosView.alpha = 1.0;
-        self.xAxisLabel.alpha = 1.0;
-        
         CGRect r = self.currentPosView.frame;
         r.origin.x = closestPos.x;
         self.currentPosView.frame = r;
-        self.xAxisLabel.text = text;
-        
-        if (self.xAxisLabel.text != nil) {
-            [self.xAxisLabel sizeToFit];
-            r = self.xAxisLabel.frame;
-            r.origin.x = round(closestPos.x - r.size.width / 2);
-            self.xAxisLabel.frame = r;
-        }
+
+
     }];
     
     NSLog(@"currentPosView %@",NSStringFromCGRect(self.currentPosView.frame));
     NSLog(@"pos %@",NSStringFromCGPoint(pos));
     
-    if(self.selectedItemCallback != nil) {
+    self.infoView.center = CGPointMake(closestPos.x, yPos);
+    self.infoView.infoLabel.text = text;
+    self.infoView.tapPoint = CGPointMake(closestPos.x, closestPos.y);
+    
+    
+    if(self.selectedItemCallback) {
         self.selectedItemCallback();
     }
     
-    self.infoView.center = CGPointMake(xPos, yPos);
-    self.infoView.infoLabel.text = text;
-    self.infoView.tapPoint = closestPos;
-    
 }
 
-- (void)hideIndicator {
+- (void)hideIndicatorForTouch:(UITouch *)touch
+{
+
+    CGPoint pos = [touch locationInView:self];
+    
     if(self.deselectedItemCallback)
-        self.deselectedItemCallback();
+        self.deselectedItemCallback(@"asdf",pos,self.infoView.infoLabel.text);
     
     self.selectedData = nil;
     
@@ -404,19 +387,10 @@
         self.currentPosView.alpha = 0.0;
         self.xAxisLabel.alpha = 0.0;
     }];
+    
 }
 
 #pragma mark - get set
-
-// TODO: This should really be a cached value. Invalidated iff ySteps changes.
-- (CGFloat)yAxisLabelsWidth {
-    double maxV = 0;
-    for(NSString *label in self.ySteps) {
-        CGSize labelSize = [label sizeWithFont:self.scaleFont];
-        if(labelSize.width > maxV) maxV = labelSize.width;
-    }
-    return maxV + PADDING;
-}
 
 
 - (void)setAllDataArray:(NSArray *)allDataArray{
@@ -450,14 +424,7 @@
 
 #pragma mark - helper
 
-static inline UIColor *GetRandomUIColor()
-{
-    CGFloat r = arc4random() % 255;
-    CGFloat g = arc4random() % 255;
-    CGFloat b = arc4random() % 255;
-    UIColor * color = [UIColor colorWithRed:r/255 green:g/255 blue:b/255 alpha:1.0f];
-    return color;
-}
+
 
 
 

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A3083ECD1AC7F65900665CA0 /* ReadMe.md in Sources */ = {isa = PBXBuildFile; fileRef = A3083ECC1AC7F65900665CA0 /* ReadMe.md */; };
 		A31040B71AC4568200807DFE /* IRBarChartView.h in Headers */ = {isa = PBXBuildFile; fileRef = A31040B51AC4568200807DFE /* IRBarChartView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A31040B81AC4568200807DFE /* IRBarChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = A31040B61AC4568200807DFE /* IRBarChartView.m */; };
 		A3988CE51AA873BA00A050B5 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A3988CE41AA873BA00A050B5 /* main.m */; };
@@ -77,6 +78,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		A3083ECC1AC7F65900665CA0 /* ReadMe.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = ReadMe.md; sourceTree = "<group>"; };
 		A31040B51AC4568200807DFE /* IRBarChartView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IRBarChartView.h; sourceTree = "<group>"; };
 		A31040B61AC4568200807DFE /* IRBarChartView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IRBarChartView.m; sourceTree = "<group>"; };
 		A3988CDF1AA873BA00A050B5 /* IRCharts.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IRCharts.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -147,6 +149,7 @@
 		A3988CD61AA873B900A050B5 = {
 			isa = PBXGroup;
 			children = (
+				A3083ECC1AC7F65900665CA0 /* ReadMe.md */,
 				A3EF483B1AB75487004393EA /* LineChart.playground */,
 				A3EF483A1AB748E5004393EA /* MyPlayground.playground */,
 				A3EF48361AB73AF6004393EA /* Libraries */,
@@ -442,6 +445,7 @@
 			files = (
 				A3988CEB1AA873BA00A050B5 /* ViewController.m in Sources */,
 				A3988CE81AA873BA00A050B5 /* AppDelegate.m in Sources */,
+				A3083ECD1AC7F65900665CA0 /* ReadMe.md in Sources */,
 				A3988CE51AA873BA00A050B5 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
