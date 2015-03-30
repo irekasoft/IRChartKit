@@ -198,6 +198,10 @@
             }else{
                 textContent = [NSString stringWithFormat:@"%0.0f",value];
             }
+            
+            if ([textContent integerValue] == 0) {
+                textContent = @"";
+            }
 
             
             NSMutableParagraphStyle* text4Style = NSMutableParagraphStyle.defaultParagraphStyle.mutableCopy;
