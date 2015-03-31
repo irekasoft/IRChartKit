@@ -46,7 +46,6 @@ static inline UIColor *GetRandomUIColor()
     
     NSArray *xSteps = @[@"1", @"2", @"3",@"4", @"5", @"6", @"7", @"8",@"9", @"10", @"11", @"12",@"13",@"14",@"15",@"16",@"17",@"18",@"19"];
     
-    
     UIScrollView *scrollView = [[UIScrollView alloc] initWithFrame:self.view_barChart.frame];
     scrollView.showsHorizontalScrollIndicator = NO;
     CGRect rect = self.view_barChart.frame;
@@ -62,7 +61,7 @@ static inline UIColor *GetRandomUIColor()
     
     self.view_barChart.backgroundColor = [UIColor clearColor];
     self.view_barChart.clipsToBounds = NO;
-    
+    barChartView.yAxisName = @"hello";
     barChartView.xSteps = xSteps;
     barChartView.allDataArray = @[@[@{@"sms":data},GetRandomUIColor()]
                                    ];
@@ -95,6 +94,7 @@ static inline UIColor *GetRandomUIColor()
     CGRect rect = self.view_lineChart.frame;
     
     IRLineChartView *lineChartView = [[IRLineChartView alloc] initWithFrame:rect];
+    lineChartView.yAxisName = @"hello";
     lineChartView.yStepNumber = 3;
     lineChartView.enabledFeedback = YES;
     self.view_lineChart.backgroundColor = [UIColor clearColor];

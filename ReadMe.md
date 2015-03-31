@@ -1,4 +1,8 @@
 ## ChartKit
 
 
-For chart solutions.
+For chart solutions consisting bar, pie/dougnut, line charts.
+
+Easy to setup framework.
+
+

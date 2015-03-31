@@ -171,12 +171,12 @@
             NSString* textContent = @"-";
             
             if (i == 0) {
-                textContent = [NSString stringWithFormat:@"%.1f",self.yMax];
+                textContent = [NSString stringWithFormat:@"%.0f",self.yMax];
             }else if (i > 0 && i < points.count){
                 
-                textContent = [NSString stringWithFormat:@"%.1f",self.yMin + (self.yMax - self.yMin)*[points[points.count - i] floatValue]];
+                textContent = [NSString stringWithFormat:@"%.0f",self.yMin + (self.yMax - self.yMin)*[points[points.count - i] floatValue]];
             }else if (i == points.count){
-                textContent = [NSString stringWithFormat:@"%.1f",self.yMin];
+                textContent = [NSString stringWithFormat:@"%.0f",self.yMin];
             }
             
             NSMutableParagraphStyle* textStyle = NSMutableParagraphStyle.defaultParagraphStyle.mutableCopy;
@@ -220,7 +220,33 @@
         NSArray *data = [[dict allValues] firstObject];
         [self plot:rect data:data color:array[1]];
     }
+ 
+    if (!self.yAxisName) {
+        return;
+    }
     
+    //// Text 3 Drawing
+    CGContextSaveGState(context);
+    CGContextTranslateCTM(context, X_BASE*0.7, (CGRectGetHeight(rect)-Y_BASE*2)/2);
+    CGContextRotateCTM(context, -90 * M_PI / 180);
+    CGRect text3Rect = CGRectMake(-(CGRectGetHeight(rect)-Y_BASE*2)/2, -X_BASE,CGRectGetHeight(rect)-Y_BASE*2, X_BASE);
+    
+    {
+        NSString* textContent = @"Rotation";
+        NSMutableParagraphStyle* text3Style = NSMutableParagraphStyle.defaultParagraphStyle.mutableCopy;
+        text3Style.alignment = NSTextAlignmentCenter;
+        
+        NSDictionary* text3FontAttributes = @{NSFontAttributeName: [UIFont systemFontOfSize:15], NSForegroundColorAttributeName: UIColor.blackColor, NSParagraphStyleAttributeName: text3Style};
+        
+        CGFloat text3TextHeight = [textContent boundingRectWithSize: CGSizeMake(text3Rect.size.width, INFINITY)  options: NSStringDrawingUsesLineFragmentOrigin attributes: text3FontAttributes context: nil].size.height;
+        CGContextSaveGState(context);
+        CGContextClipToRect(context, text3Rect);
+        [textContent drawInRect: CGRectMake(CGRectGetMinX(text3Rect), CGRectGetMinY(text3Rect) + (CGRectGetHeight(text3Rect) - text3TextHeight) / 2, CGRectGetWidth(text3Rect), text3TextHeight) withAttributes: text3FontAttributes];
+        CGContextRestoreGState(context);
+    }
+    
+    
+    CGContextRestoreGState(context);
 }
 
 

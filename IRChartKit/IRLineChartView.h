@@ -42,6 +42,8 @@ typedef void(^IRLineChartDeselectedItem)();
 @property BOOL hasDot;
 @property UILabel *xAxisLabel;
 
+@property NSString *yAxisName;
+
 @property (copy) IRLineChartSelectedItem selectedItemCallback;
 @property (copy) IRLineChartDeselectedItem deselectedItemCallback; /// Called after a data point is deselected and before the next `selected` callback
 

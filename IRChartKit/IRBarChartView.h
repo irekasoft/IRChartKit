@@ -24,6 +24,7 @@ typedef void(^IRLineChartDeselectedItem)();
     CGFloat extra_bed;
 }
 
+@property NSString *yAxisName;
 @property NSInteger yStepNumber;
 @property double scaleForAnimation;
 @property NSNumber *selectedData;
