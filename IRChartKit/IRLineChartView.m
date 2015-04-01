@@ -221,9 +221,9 @@
         [self plot:rect data:data color:array[1]];
     }
  
-    if (!self.yAxisName) {
-        return;
-    }
+    if (self.yAxisName) {
+        
+    
     
     //// Text 3 Drawing
     CGContextSaveGState(context);
@@ -232,7 +232,7 @@
     CGRect text3Rect = CGRectMake(-(CGRectGetHeight(rect)-Y_BASE*2)/2, -X_BASE,CGRectGetHeight(rect)-Y_BASE*2, X_BASE);
     
     {
-        NSString* textContent = @"Rotation";
+        NSString* textContent = self.yAxisName;
         NSMutableParagraphStyle* text3Style = NSMutableParagraphStyle.defaultParagraphStyle.mutableCopy;
         text3Style.alignment = NSTextAlignmentCenter;
         
@@ -247,6 +247,7 @@
     
     
     CGContextRestoreGState(context);
+    }
 }
 
 

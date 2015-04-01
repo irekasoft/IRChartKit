@@ -223,9 +223,9 @@
     bezierPath.lineWidth = 1;
     [bezierPath stroke];
     
-    if (!self.yAxisName) {
-        return;
-    }
+    if (self.yAxisName) {
+        
+    
     
     //// Text 3 Drawing
     CGContextSaveGState(context);
@@ -234,7 +234,7 @@
     CGRect text3Rect = CGRectMake(-(CGRectGetHeight(rect)-Y_BASE*2)/2, -X_BASE,CGRectGetHeight(rect)-Y_BASE*2, X_BASE);
    
     {
-        NSString* textContent = @"Rotation";
+        NSString* textContent = self.yAxisName;
         NSMutableParagraphStyle* text3Style = NSMutableParagraphStyle.defaultParagraphStyle.mutableCopy;
         text3Style.alignment = NSTextAlignmentCenter;
         
@@ -246,9 +246,8 @@
         [textContent drawInRect: CGRectMake(CGRectGetMinX(text3Rect), CGRectGetMinY(text3Rect) + (CGRectGetHeight(text3Rect) - text3TextHeight) / 2, CGRectGetWidth(text3Rect), text3TextHeight) withAttributes: text3FontAttributes];
         CGContextRestoreGState(context);
     }
-    
-
     CGContextRestoreGState(context);
+    }
 }
 
 
