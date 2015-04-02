@@ -10,6 +10,7 @@
 		A3083ECD1AC7F65900665CA0 /* ReadMe.md in Sources */ = {isa = PBXBuildFile; fileRef = A3083ECC1AC7F65900665CA0 /* ReadMe.md */; };
 		A31040B71AC4568200807DFE /* IRBarChartView.h in Headers */ = {isa = PBXBuildFile; fileRef = A31040B51AC4568200807DFE /* IRBarChartView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A31040B81AC4568200807DFE /* IRBarChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = A31040B61AC4568200807DFE /* IRBarChartView.m */; };
+		A373D0AE1ACCC3F000F51239 /* 1.png in Resources */ = {isa = PBXBuildFile; fileRef = A373D0AD1ACCC3F000F51239 /* 1.png */; };
 		A3988CE51AA873BA00A050B5 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A3988CE41AA873BA00A050B5 /* main.m */; };
 		A3988CE81AA873BA00A050B5 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A3988CE71AA873BA00A050B5 /* AppDelegate.m */; };
 		A3988CEB1AA873BA00A050B5 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A3988CEA1AA873BA00A050B5 /* ViewController.m */; };
@@ -82,6 +83,7 @@
 		A3083ECE1AC8000600665CA0 /* Chart.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = Chart.playground; sourceTree = "<group>"; };
 		A31040B51AC4568200807DFE /* IRBarChartView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IRBarChartView.h; sourceTree = "<group>"; };
 		A31040B61AC4568200807DFE /* IRBarChartView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IRBarChartView.m; sourceTree = "<group>"; };
+		A373D0AD1ACCC3F000F51239 /* 1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 1.png; sourceTree = "<group>"; };
 		A3988CDF1AA873BA00A050B5 /* IRCharts.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IRCharts.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A3988CE31AA873BA00A050B5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A3988CE41AA873BA00A050B5 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -147,6 +149,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A373D0AC1ACCC3F000F51239 /* Screenshots */ = {
+			isa = PBXGroup;
+			children = (
+				A373D0AD1ACCC3F000F51239 /* 1.png */,
+			);
+			path = Screenshots;
+			sourceTree = "<group>";
+		};
 		A3988CD61AA873B900A050B5 = {
 			isa = PBXGroup;
 			children = (
@@ -154,6 +164,7 @@
 				A3EF483B1AB75487004393EA /* LineChart.playground */,
 				A3EF483A1AB748E5004393EA /* MyPlayground.playground */,
 				A3083ECE1AC8000600665CA0 /* Chart.playground */,
+				A373D0AC1ACCC3F000F51239 /* Screenshots */,
 				A3EF48361AB73AF6004393EA /* Libraries */,
 				A3988CE11AA873BA00A050B5 /* Classes */,
 				A3988CFB1AA873BA00A050B5 /* IRChartsTests */,
@@ -412,6 +423,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A3988CEE1AA873BA00A050B5 /* Main.storyboard in Resources */,
+				A373D0AE1ACCC3F000F51239 /* 1.png in Resources */,
 				A3988CF31AA873BA00A050B5 /* LaunchScreen.xib in Resources */,
 				A3988CF01AA873BA00A050B5 /* Images.xcassets in Resources */,
 			);
