@@ -84,7 +84,7 @@
     
     CGFloat rightMargin = 5;
 
-    //// horizontal grid
+    // horizontal grid - paksi melintang
     x_gap = (rect.size.width - rightMargin - X_BASE) / self.xSteps.count;
     CGFloat text_width = self.bounds.size.width / self.xSteps.count;
     
@@ -98,24 +98,20 @@
         [bezier5Path stroke];
         
         //// 1, 2, 3, xSteps
-        CGRect textRect = CGRectMake( X_BASE + (i * x_gap) - text_width/2, rect.size.height-Y_BASE-BOTTOM, text_width, BOTTOM);
+        CGRect textRect = CGRectMake( X_BASE + (i * x_gap) - text_width/2, rect.size.height-Y_BASE-BOTTOM, text_width, BOTTOM*2);
+        
         {
             NSString* textContent =self.xSteps[i];
 //            NSLog(@"text %@",textContent);
             NSMutableParagraphStyle* textStyle = NSMutableParagraphStyle.defaultParagraphStyle.mutableCopy;
             textStyle.alignment = NSTextAlignmentCenter;
             
-            NSDictionary* textFontAttributes = @{NSFontAttributeName: [UIFont systemFontOfSize:12], NSForegroundColorAttributeName: UIColor.blackColor, NSParagraphStyleAttributeName: textStyle};
-            
-            CGFloat textTextHeight = [textContent boundingRectWithSize: CGSizeMake(textRect.size.width, INFINITY)  options: NSStringDrawingUsesLineFragmentOrigin attributes: textFontAttributes context: nil].size.height;
-            CGContextSaveGState(context);
-            CGContextClipToRect(context, textRect);
-            [textContent drawInRect: CGRectMake(CGRectGetMinX(textRect), CGRectGetMinY(textRect) + (CGRectGetHeight(textRect) - textTextHeight) / 2, CGRectGetWidth(textRect), textTextHeight) withAttributes: textFontAttributes];
-            CGContextRestoreGState(context);
+            NSDictionary* text2FontAttributes = @{NSFontAttributeName: [UIFont fontWithName: @"HelveticaNeue-Light" size:11], NSForegroundColorAttributeName: UIColor.blackColor, NSParagraphStyleAttributeName:textStyle};
+
+            [textContent drawInRect:textRect withAttributes:text2FontAttributes];
         }
     }
 
-    
     CGFloat height_y_range = rect.size.height - Y_BASE*2 - TOP_MARGIN;
 
     // xpoints
@@ -139,7 +135,9 @@
         
         points = tempArray;
     }
-    // vertical axis
+    
+    
+    // vertical axis - paksi menegak
     for (int i = 0; i <= points.count; i++){
         
         NSString* textContent = @"-";
@@ -161,8 +159,7 @@
         verticalPath.lineWidth = 1;
         [verticalPath stroke];
         
-        // Text Drawing
-        // Text Size
+        // vertical axis
         CGFloat width = 50;
         CGFloat height = 20;
         CGRect textRect = CGRectMake(X_BASE-width-10, y_pos-height/2, width, height);
@@ -225,7 +222,7 @@
         
     
     
-    //// Text 3 Drawing
+    //// Text 3
     CGContextSaveGState(context);
     CGContextTranslateCTM(context, X_BASE*0.7, (CGRectGetHeight(rect)-Y_BASE*2)/2);
     CGContextRotateCTM(context, -90 * M_PI / 180);
