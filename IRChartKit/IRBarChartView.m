@@ -77,7 +77,7 @@
     
     CGFloat rightMargin = 5;
     
-    //// horizontal grid
+    //// horizontal grid - paksi melintang
     x_gap = (rect.size.width - rightMargin - X_BASE) / self.xSteps.count;
     CGFloat text_width = self.bounds.size.width / self.xSteps.count;
     
@@ -91,20 +91,15 @@
         [bezier5Path stroke];
         
         //// 1, 2, 3, xSteps
-        CGRect textRect = CGRectMake( X_BASE + (i * x_gap)+ x_gap/2 - text_width/2, rect.size.height-Y_BASE-BOTTOM, text_width, BOTTOM);
+        CGRect textRect = CGRectMake( X_BASE + (i * x_gap)+ x_gap/2 - text_width/2, rect.size.height-Y_BASE-BOTTOM, text_width, BOTTOM*2);
         {
             NSString* textContent =self.xSteps[i];
-            //            NSLog(@"text %@",textContent);
             NSMutableParagraphStyle* textStyle = NSMutableParagraphStyle.defaultParagraphStyle.mutableCopy;
             textStyle.alignment = NSTextAlignmentCenter;
             
-            NSDictionary* textFontAttributes = @{NSFontAttributeName: [UIFont systemFontOfSize:12], NSForegroundColorAttributeName: UIColor.blackColor, NSParagraphStyleAttributeName: textStyle};
+            NSDictionary* textFontAttributes = @{NSFontAttributeName: [UIFont systemFontOfSize:10.5], NSForegroundColorAttributeName: UIColor.blackColor, NSParagraphStyleAttributeName: textStyle};
             
-            CGFloat textTextHeight = [textContent boundingRectWithSize: CGSizeMake(textRect.size.width, INFINITY)  options: NSStringDrawingUsesLineFragmentOrigin attributes: textFontAttributes context: nil].size.height;
-            CGContextSaveGState(context);
-            CGContextClipToRect(context, textRect);
-            [textContent drawInRect: CGRectMake(CGRectGetMinX(textRect), CGRectGetMinY(textRect) + (CGRectGetHeight(textRect) - textTextHeight) / 2, CGRectGetWidth(textRect), textTextHeight) withAttributes: textFontAttributes];
-            CGContextRestoreGState(context);
+            [textContent drawInRect:textRect withAttributes:textFontAttributes];
         }
     }
     

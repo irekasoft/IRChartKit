@@ -44,7 +44,9 @@ static inline UIColor *GetRandomUIColor()
 
 - (void)setupBarChart{
     
-    NSArray *xSteps = @[@"1", @"2", @"3",@"4", @"5", @"6", @"7", @"8",@"9", @"10", @"11", @"12",@"13",@"14",@"15",@"16",@"17",@"18",@"19"];
+    
+    
+    NSArray *xSteps = @[@"2\nJan", @"4\n Jan", @"31 ",@"4", @"5", @"6", @"7", @"8",@"9", @"10", @"11", @"12",@"13",@"14",@"15",@"16",@"17",@"18",@"19"];
     
     UIScrollView *scrollView = [[UIScrollView alloc] initWithFrame:self.view_barChart.frame];
     scrollView.showsHorizontalScrollIndicator = NO;
@@ -102,9 +104,10 @@ static inline UIColor *GetRandomUIColor()
     //    self.xSteps = @[@"Jan", @"Feb", @"Mac",@"April", @"May", @"Jun", @"Julai", @"Ogos",@"September", @"Oktober", @"November", @"Disember"];
     lineChartView.xSteps = xSteps;
     lineChartView.hasDot = YES;
+    
 
     
-    NSArray *data = @[@(4),@(12),@(3),@(2),@(6),@(8),@(22),@(12),@(0.8),@(0.8),@(1.0),@(3),@(2)];
+    NSArray *data = @[@(0),@(1),@(0),@(0),@(0),@(0)];
     NSArray *data2 = @[@(1),@(4),@(7),@(23),@(6),@(8),@(22),@(23),@(1),@(3),@(1.0),@(6),@(4)];
     NSArray *data3 = @[@(21),@(32),@(8),@(5),@(13),@(32),@(3),@(9),@(21),@(12),@(1.0),@(6),@(4)];
     NSArray *data4 = @[@(121),@(12),@(3),@(11),@(3),@(2),@(3),@(9),@(1),@(3),@(1.0),@(5),@(2),@(121),@(121),@(121),@(121),@(121),@(121),@(124),@(121),@(11)];

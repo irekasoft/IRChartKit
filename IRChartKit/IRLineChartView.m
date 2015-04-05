@@ -102,7 +102,6 @@
         
         {
             NSString* textContent =self.xSteps[i];
-//            NSLog(@"text %@",textContent);
             NSMutableParagraphStyle* textStyle = NSMutableParagraphStyle.defaultParagraphStyle.mutableCopy;
             textStyle.alignment = NSTextAlignmentCenter;
             
@@ -168,12 +167,12 @@
             NSString* textContent = @"-";
             
             if (i == 0) {
-                textContent = [NSString stringWithFormat:@"%.0f",self.yMax];
+                textContent = [NSString stringWithFormat:@"%.1f",self.yMax];
             }else if (i > 0 && i < points.count){
                 
-                textContent = [NSString stringWithFormat:@"%.0f",self.yMin + (self.yMax - self.yMin)*[points[points.count - i] floatValue]];
+                textContent = [NSString stringWithFormat:@"%.1f",self.yMin + (self.yMax - self.yMin)*[points[points.count - i] floatValue]];
             }else if (i == points.count){
-                textContent = [NSString stringWithFormat:@"%.0f",self.yMin];
+                textContent = [NSString stringWithFormat:@"%.1f",self.yMin];
             }
             
             NSMutableParagraphStyle* textStyle = NSMutableParagraphStyle.defaultParagraphStyle.mutableCopy;
@@ -220,11 +219,11 @@
  
     if (self.yAxisName) {
         
-    
+    CGPoint yAxisNameOffset = CGPointMake(-20, 0);
     
     //// Text 3
     CGContextSaveGState(context);
-    CGContextTranslateCTM(context, X_BASE*0.7, (CGRectGetHeight(rect)-Y_BASE*2)/2);
+    CGContextTranslateCTM(context, X_BASE*0.6, (CGRectGetHeight(rect)-Y_BASE*2)/2);
     CGContextRotateCTM(context, -90 * M_PI / 180);
     CGRect text3Rect = CGRectMake(-(CGRectGetHeight(rect)-Y_BASE*2)/2, -X_BASE,CGRectGetHeight(rect)-Y_BASE*2, X_BASE);
     
@@ -260,6 +259,12 @@
     CGFloat height_y_range = rect.size.height - Y_BASE*2 - TOP_MARGIN;
     
     CGFloat range = self.yMax - self.yMin;
+    
+    
+    if (range == 0) {
+        NSLog(@"cannot plot range %f", range);
+        return;
+    }
     
     for (int i = 0; i < data.count; i++){
         
